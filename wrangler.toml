@@ -1,0 +1,8 @@
+name = "tristero-docs"
+# Set this to today's date
+compatibility_date = "2026-03-23"
+
+[assets]
+directory = "./out/"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
