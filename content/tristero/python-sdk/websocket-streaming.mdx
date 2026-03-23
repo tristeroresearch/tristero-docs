@@ -1,0 +1,140 @@
+---
+title: WebSocket Streaming
+description: Real-time quote streaming and limit orders
+---
+
+# WebSocket Quote Streaming
+
+`subscribe_quotes` opens a persistent WebSocket connection and delivers live quotes via an async callback (~500 ms updates).
+
+If the callback is still running when a newer quote arrives, intermediate updates are **dropped** and only the latest quote is delivered once the callback finishes (latest-only pattern). This makes it safe to do slow work (e.g. sign + submit) inside the callback without worrying about duplicate executions.
+
+## Simple: Print Every Quote
+
+```py
+import asyncio
+from tristero import subscribe_quotes
+
+
+async def main() -> None:
+    async def on_quote(quote):
+        print(f"dst_qty={quote['dst_token_quantity']}  order_id={quote['order_id'][:16]}...")
+
+    async def on_error(exc):
+        print(f"Error: {exc}")
+
+    async with await subscribe_quotes(
+        wallet="0xYOUR_WALLET",
+        src_chain=42161,
+        src_token="0xaf88d065e77c8cC2239327C5EDb3A432268e5831",  # USDC
+        dst_chain=1,
+        dst_token="0xdAC17F958D2ee523a2206206994597C13D831ec7",  # USDT
+        amount=1_000_000,
+        on_quote=on_quote,
+        on_error=on_error,
+    ) as sub:
+        await asyncio.sleep(10)  # stream for 10 seconds
+
+
+asyncio.run(main())
+```
+
+## Advanced: Sign and Submit First Quote
+
+```py
+import asyncio
+import os
+
+from eth_account import Account
+from tristero import subscribe_quotes, sign_and_submit, make_async_w3
+
+
+async def main() -> None:
+    private_key = os.getenv("TEST_ACCOUNT_PRIVKEY", "")
+    wallet = Account.from_key(private_key).address
+    w3 = make_async_w3(os.getenv("ARB_RPC_URL", "https://arbitrum-one-rpc.publicnode.com"))
+
+    done = asyncio.Event()
+
+    async def on_quote(quote):
+        if done.is_set():
+            return
+        quote["_type"] = "swap"
+        result = await sign_and_submit(quote, private_key, w3=w3, wait=False)
+        print(result)
+        done.set()
+
+    sub = await subscribe_quotes(
+        wallet=wallet,
+        src_chain=42161,
+        src_token="0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+        dst_chain=42161,
+        dst_token="0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        amount=1_000_000,
+        on_quote=on_quote,
+    )
+    await done.wait()
+    await sub.close()
+
+
+asyncio.run(main())
+```
+
+## Limit Order: Wait for Target Price
+
+```py
+import asyncio
+import os
+
+from eth_account import Account
+from tristero import subscribe_quotes, sign_and_submit, make_async_w3
+
+
+async def main() -> None:
+    private_key = os.getenv("TEST_ACCOUNT_PRIVKEY", "")
+    wallet = Account.from_key(private_key).address
+    w3 = make_async_w3(os.getenv("ARB_RPC_URL", "https://arbitrum-one-rpc.publicnode.com"))
+
+    done = asyncio.Event()
+    baseline: list[int] = []
+    improvement_bps = 10  # submit when price is 10 bps better than first quote
+
+    async def on_quote(quote):
+        if done.is_set():
+            return
+        dst_qty = int(quote.get("dst_token_quantity", 0))
+
+        if not baseline:
+            baseline.append(dst_qty)
+            print(f"Baseline: {dst_qty}")
+            return
+
+        threshold = baseline[0] * (10_000 + improvement_bps) / 10_000
+        if dst_qty < threshold:
+            print(f"dst_qty={dst_qty} (waiting for >= {threshold:.0f})")
+            return
+
+        # Threshold met — sign and submit THIS specific quote
+        print(f"Target reached: {dst_qty} >= {threshold:.0f}, submitting!")
+        quote["_type"] = "swap"
+        result = await sign_and_submit(quote, private_key, w3=w3, wait=False)
+        print(result)
+        done.set()
+
+    sub = await subscribe_quotes(
+        wallet=wallet,
+        src_chain=42161,
+        src_token="0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+        dst_chain=42161,
+        dst_token="0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        amount=1_000_000,
+        on_quote=on_quote,
+    )
+    await done.wait()
+    await sub.close()
+
+
+asyncio.run(main())
+```
+
+The callback receives the exact quote that triggered the condition. Because of the latest-only pattern, even if signing takes longer than 500 ms, that specific quote is what gets signed — newer arrivals simply queue up and don't cause duplicates.

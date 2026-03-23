@@ -1,12 +1,24 @@
 import { docs } from 'collections/server';
-import { type InferPageType, loader } from 'fumadocs-core/source';
+import { type InferPageType, loader, multiple } from 'fumadocs-core/source';
+import { openapiPlugin, openapiSource } from 'fumadocs-openapi/server';
+import { openapi, tristeroOpenapi } from '@/lib/openapi';
 
 // See https://fumadocs.dev/docs/headless/source-api for more info
-export const source = loader({
-  baseUrl: '/docs',
-  source: docs.toFumadocsSource(),
-  plugins: [],
-});
+export const source = loader(
+  multiple({
+    docs: docs.toFumadocsSource(),
+    openapi: await openapiSource(openapi, {
+      baseDir: 'feather/api',
+    }),
+    tristeroOpenapi: await openapiSource(tristeroOpenapi, {
+      baseDir: 'tristero/api',
+    }),
+  }),
+  {
+    baseUrl: '/docs',
+    plugins: [openapiPlugin()],
+  }
+);
 
 export function getPageImage(page: InferPageType<typeof source>) {
   const segments = [...page.slugs, 'image.webp'];
@@ -18,6 +30,11 @@ export function getPageImage(page: InferPageType<typeof source>) {
 }
 
 export async function getLLMText(page: InferPageType<typeof source>) {
+  // Handle OpenAPI pages (feather and tristero)
+  if (page.data.type === 'openapi' || page.data.type === 'tristeroOpenapi') {
+    return JSON.stringify(page.data.getSchema().bundled, null, 2);
+  }
+
   const processed = await page.data.getText('processed');
 
   return `# ${page.data.title}

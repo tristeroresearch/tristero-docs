@@ -1,0 +1,28 @@
+---
+title: Configuration
+description: Environment configuration for the Python SDK
+---
+
+# Configuration
+
+Tristero supports three environments: **PRODUCTION** (default), **STAGING**, and **LOCAL**.
+
+## Global Configuration
+
+Set the environment globally at startup:
+
+```py
+from tristero import set_config
+
+set_config("STAGING")  # all subsequent calls use the staging API
+```
+
+## Per-Call Override
+
+Or override per call:
+
+```py
+quote = await get_swap_quote(..., env="LOCAL")
+```
+
+Every user-facing function in the SDK accepts an optional `env` keyword argument.

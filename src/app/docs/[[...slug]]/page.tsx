@@ -12,12 +12,27 @@ import { getMDXComponents } from '@/components/mdx';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { gitConfig } from '@/lib/layout.shared';
+import { APIPage } from '@/components/api-page';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
+  // Handle OpenAPI pages (feather and tristero)
+  if (page.data.type === 'openapi' || page.data.type === 'tristeroOpenapi') {
+    return (
+      <DocsPage full>
+        <DocsTitle>{page.data.title}</DocsTitle>
+        <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
+        <DocsBody>
+          <APIPage {...page.data.getAPIPageProps()} />
+        </DocsBody>
+      </DocsPage>
+    );
+  }
+
+  // Handle regular MDX pages
   const MDX = page.data.body;
   const markdownUrl = `/llms.mdx/docs/${[...page.slugs, 'index.mdx'].join('/')}`;
 
@@ -35,7 +50,6 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       <DocsBody>
         <MDX
           components={getMDXComponents({
-            // this allows you to link to other pages with relative file paths
             a: createRelativeLink(source, page),
           })}
         />

@@ -1,0 +1,31 @@
+---
+title: Overview
+description: Tristero Python SDK overview and installation
+---
+
+# Python SDK
+
+[![PyPI version](https://badge.fury.io/py/tristero.svg)](https://badge.fury.io/py/tristero)
+[![Python Support](https://img.shields.io/pypi/pyversions/tristero.svg)](https://pypi.org/project/tristero/)
+
+This library provides both high-level convenience functions and lower-level components for Tristero's trading platform.
+
+## How it works
+
+Tristero supports two primary swap mechanisms:
+
+### Permit2 Swaps (EVM-to-EVM)
+- **Quote & Approve** - Request a quote and approve tokens via Permit2 (gasless approval)
+- **Sign & Submit** - Sign an EIP-712 order and submit for execution
+- **Monitor** - Track swap progress via WebSocket updates
+
+### Feather Swaps (UTXO-based)
+- **Quote & Deposit** - Request a quote to receive a deposit address
+- **Manual Transfer** - Send funds to the provided deposit address
+- **Monitor** - Track swap completion via WebSocket updates
+
+## Installation
+
+```bash
+pip install tristero
+```

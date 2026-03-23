@@ -1,0 +1,151 @@
+---
+title: Margin Trading
+description: Open and manage leveraged positions
+---
+
+# Margin Trading
+
+## Open Position
+
+```py
+import asyncio
+import json
+import os
+
+from eth_account import Account
+
+from tristero import get_swap_quote, sign_and_submit
+
+
+async def main() -> None:
+    private_key = os.getenv("TEST_ACCOUNT_PRIVKEY")
+    if not private_key:
+        raise RuntimeError("Set TEST_ACCOUNT_PRIVKEY")
+
+    wallet = Account.from_key(private_key).address
+
+    # 1. Get a margin quote (2x leveraged USDC/WETH on Arbitrum)
+    quote = await get_swap_quote(
+        wallet=wallet,
+        src_chain=42161,
+        src_token="0xaf88d065e77c8cC2239327C5EDb3A432268e5831",  # USDC (collateral)
+        dst_chain=42161,
+        dst_token="0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",  # WETH (base)
+        amount=1_000_000,  # 1 USDC collateral (6 decimals)
+        leverage=2,
+    )
+    print(json.dumps(quote, indent=2))
+
+    # 2. Sign and submit (no w3 needed for margin)
+    result = await sign_and_submit(quote, private_key, wait=True, timeout=120)
+    print(result)
+
+
+asyncio.run(main())
+```
+
+## Direct Open
+
+```py
+import asyncio
+import os
+
+from eth_account import Account
+from tristero import open_margin_position
+
+
+async def main() -> None:
+    private_key = os.getenv("TEST_ACCOUNT_PRIVKEY", "")
+    if not private_key:
+        raise RuntimeError("Set TEST_ACCOUNT_PRIVKEY")
+
+    wallet = Account.from_key(private_key).address
+
+    result = await open_margin_position(
+        private_key=private_key,
+        chain_id="42161",
+        wallet_address=wallet,
+        collateral_token="0xaf88d065e77c8cC2239327C5EDb3A432268e5831",  # USDC
+        base_token="0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",  # WETH
+        leverage_ratio=2,
+        collateral_amount="1000000",  # 1 USDC (6 decimals)
+        wait_for_result=True,
+        timeout=120,
+    )
+    print(result)
+
+
+asyncio.run(main())
+```
+
+## Alternative Collateral
+
+Any token can be used as collateral:
+
+**USDT0 as collateral:**
+```py
+result = await open_margin_position(
+    private_key=private_key,
+    chain_id="42161",
+    wallet_address=wallet,
+    collateral_token="0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",  # USDT0
+    base_token="0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",        # WETH
+    leverage_ratio=2,
+    collateral_amount="1000000",  # 1 USDT0 (6 decimals)
+)
+```
+
+**WETH as collateral:**
+```py
+result = await open_margin_position(
+    private_key=private_key,
+    chain_id="42161",
+    wallet_address=wallet,
+    collateral_token="0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",  # WETH
+    base_token="0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",        # WETH
+    leverage_ratio=2,
+    collateral_amount="500000000000000",  # 0.0005 WETH (18 decimals)
+)
+```
+
+The quote response includes `loan_token`, `collateral_token`, and `base_token` objects with full metadata, plus `interest_rate_bps` for the borrowing cost.
+
+## List and Close Positions
+
+```py
+import asyncio
+import os
+
+from eth_account import Account
+from tristero import close_margin_position, list_margin_positions
+
+
+async def main() -> None:
+    private_key = os.getenv("TEST_ACCOUNT_PRIVKEY", "")
+    if not private_key:
+        raise RuntimeError("Set TEST_ACCOUNT_PRIVKEY")
+
+    wallet = Account.from_key(private_key).address
+
+    positions = await list_margin_positions(wallet)
+    open_pos = next((p for p in positions if p.status == "open"), None)
+    if not open_pos:
+        raise RuntimeError("no open positions")
+
+    result = await close_margin_position(
+        private_key=private_key,
+        chain_id="42161",
+        position_id=open_pos.taker_token_id,
+        escrow_contract=open_pos.escrow_address,
+        authorized=open_pos.filler_address,
+        cash_settle=False,
+        fraction_bps=10_000,
+        deadline_seconds=3600,
+        wait_for_result=True,
+        timeout=120,
+    )
+    print(result)
+
+
+asyncio.run(main())
+```

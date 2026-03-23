@@ -1,0 +1,474 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Feather API",
+    "description": "A simple HTTP/JSON API for cross-chain swaps. No authentication required.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Tristero Support",
+      "url": "https://tristero.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://feather-prod.tristero.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/assets": {
+      "get": {
+        "operationId": "getAssets",
+        "summary": "List supported assets",
+        "description": "Returns the list of supported assets and their current market prices and liquidity information.",
+        "tags": ["Assets"],
+        "responses": {
+          "200": {
+            "description": "List of assets with pricing information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetPrice"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/price": {
+      "get": {
+        "operationId": "getPrice",
+        "summary": "Get price quote",
+        "description": "Returns a live price quote for a swap between two assets. Optionally computes a worked example for a specific input or output amount.",
+        "tags": ["Pricing"],
+        "parameters": [
+          {
+            "name": "input_asset",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Asset you are sending (e.g. BTC)"
+          },
+          {
+            "name": "output_asset",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Asset you want to receive (e.g. ETH)"
+          },
+          {
+            "name": "input_amount",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "description": "If provided, compute the expected output for this input amount"
+          },
+          {
+            "name": "output_amount",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "description": "If provided, estimate the required input to receive this output amount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Price information for the requested swap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trade": {
+      "post": {
+        "operationId": "createTrade",
+        "summary": "Create a trade",
+        "description": "Creates a new trade. Allocates and returns a deposit address you should send funds to.",
+        "tags": ["Trading"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TradeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trade created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Trade"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "operationId": "getStatus",
+        "summary": "Get trade status",
+        "description": "Returns the current state of a trade.",
+        "tags": ["Trading"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Trade ID returned by POST /trade"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current trade status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Trade"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Trade not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AssetPrice": {
+        "type": "object",
+        "properties": {
+          "AssetName": {
+            "type": "string",
+            "description": "Asset identifier (e.g. \"BTC\")"
+          },
+          "UsdMarketMid": {
+            "type": "number",
+            "format": "float",
+            "description": "Current USD mid-market price"
+          },
+          "HalfSpread": {
+            "type": "number",
+            "format": "float",
+            "description": "Half the bid-ask spread applied to trades"
+          },
+          "MarketHalfSpread": {
+            "type": "number",
+            "format": "float",
+            "description": "External market half-spread for reference"
+          },
+          "HalfFee": {
+            "type": "number",
+            "format": "float",
+            "description": "Estimated half of the on-chain fee in asset units"
+          },
+          "MinAmount": {
+            "type": "number",
+            "format": "float",
+            "description": "Minimum deposit amount Feather will process"
+          },
+          "MaxOutput": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum amount Feather will pay out of this asset"
+          },
+          "MaxInput": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum amount Feather will accept as input"
+          },
+          "PriceImpactRate": {
+            "type": "number",
+            "format": "float",
+            "description": "λ — rate of price adjustment per unit traded"
+          },
+          "CapacityFraction": {
+            "type": "number",
+            "format": "float",
+            "description": "Current balance as a fraction of target"
+          },
+          "TargetBalance": {
+            "type": "number",
+            "format": "float",
+            "description": "Target balance in asset units"
+          },
+          "CurrentBalance": {
+            "type": "number",
+            "format": "float",
+            "description": "Current liquid balance in asset units"
+          },
+          "FundingAddress": {
+            "type": "string",
+            "description": "Feather's main address for this asset (for funding/monitoring)"
+          }
+        },
+        "required": ["AssetName", "UsdMarketMid", "HalfSpread", "MarketHalfSpread", "HalfFee", "MinAmount", "MaxOutput", "MaxInput", "PriceImpactRate", "CapacityFraction", "TargetBalance", "CurrentBalance", "FundingAddress"]
+      },
+      "PriceInfo": {
+        "type": "object",
+        "properties": {
+          "InputAsset": {
+            "$ref": "#/components/schemas/AssetPrice"
+          },
+          "OutputAsset": {
+            "$ref": "#/components/schemas/AssetPrice"
+          },
+          "ExchangeRate": {
+            "type": "number",
+            "format": "float",
+            "description": "Output units per input unit at the current mid-price"
+          },
+          "InputFee": {
+            "type": "number",
+            "format": "float",
+            "description": "On-chain fee deducted from your deposit before exchange"
+          },
+          "MaxInput": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum deposit Feather will accept on this route right now"
+          },
+          "MinInput": {
+            "type": "number",
+            "format": "float",
+            "description": "Minimum deposit Feather will process"
+          },
+          "MaxOutput": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum Feather will pay out"
+          },
+          "Example": {
+            "$ref": "#/components/schemas/ExecutedTrade",
+            "description": "Present if input_amount or output_amount was supplied"
+          }
+        },
+        "required": ["InputAsset", "OutputAsset", "ExchangeRate", "InputFee", "MaxInput", "MinInput", "MaxOutput"]
+      },
+      "ExecutedTrade": {
+        "type": "object",
+        "properties": {
+          "InputAmount": {
+            "type": "number",
+            "format": "float",
+            "description": "Input amount used in the calculation"
+          },
+          "InputUsd": {
+            "type": "number",
+            "format": "float",
+            "description": "USD value of the input"
+          },
+          "OutputAmount": {
+            "type": "number",
+            "format": "float",
+            "description": "Expected output amount"
+          },
+          "OutputUsd": {
+            "type": "number",
+            "format": "float",
+            "description": "USD value of the output"
+          },
+          "Overpay": {
+            "type": "number",
+            "format": "float",
+            "description": "Amount exceeding the cap that would be returned"
+          },
+          "Warning": {
+            "type": "string",
+            "description": "Describes why execution would be degraded"
+          }
+        },
+        "required": ["InputAmount", "InputUsd", "OutputAmount", "OutputUsd"]
+      },
+      "TradeRequest": {
+        "type": "object",
+        "properties": {
+          "InputAsset": {
+            "type": "string",
+            "description": "Asset you are sending (e.g. \"BTC\")"
+          },
+          "OutputAsset": {
+            "type": "string",
+            "description": "Asset you want to receive (e.g. \"ETH\")"
+          },
+          "OutputAddress": {
+            "type": "string",
+            "description": "Address on the output chain to receive funds"
+          },
+          "ReturnAddress": {
+            "type": "string",
+            "description": "Address on the input chain to refund to if execution fails"
+          },
+          "MaxSlippage": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum acceptable rate degradation as a fraction (e.g. 0.01 = 1%). Default 0 = no limit."
+          }
+        },
+        "required": ["InputAsset", "OutputAsset", "OutputAddress"]
+      },
+      "Trade": {
+        "type": "object",
+        "properties": {
+          "TradeID": {
+            "type": "string",
+            "description": "Unique trade identifier"
+          },
+          "Created": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the trade was created"
+          },
+          "Expires": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the trade expires if no deposit arrives (2 hours after creation)"
+          },
+          "Deposited": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the deposit was confirmed (omitted until then)"
+          },
+          "Sent": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the output transaction was broadcast (omitted until then)"
+          },
+          "Finalized": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the trade completed (omitted until then)"
+          },
+          "InputAsset": {
+            "type": "string",
+            "description": "Asset being sent"
+          },
+          "OutputAsset": {
+            "type": "string",
+            "description": "Asset being received"
+          },
+          "OutputAddress": {
+            "type": "string",
+            "description": "Address to receive output funds"
+          },
+          "ReturnAddress": {
+            "type": "string",
+            "description": "Address for refunds if execution fails"
+          },
+          "MaxSlippage": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum acceptable slippage"
+          },
+          "InputAddress": {
+            "type": "string",
+            "description": "Unique deposit address for this trade"
+          },
+          "MaxInput": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum deposit amount Feather will accept"
+          },
+          "QuotedPrice": {
+            "type": "number",
+            "format": "float",
+            "description": "Exchange rate at creation time"
+          },
+          "ExecutionState": {
+            "type": "string",
+            "description": "Current state of the trade (e.g. \"Awaiting Deposit\", \"Finalized\", \"Expired\")"
+          },
+          "FailedAndReturned": {
+            "type": "boolean",
+            "description": "true if the trade failed and funds are being returned"
+          },
+          "InputTxId": {
+            "type": "string",
+            "description": "Transaction ID of your deposit (once detected)"
+          },
+          "OutputTxId": {
+            "type": "string",
+            "description": "Transaction ID of Feather's outgoing payment (once sent)"
+          },
+          "PriceInfo": {
+            "$ref": "#/components/schemas/PriceInfo"
+          },
+          "Executed": {
+            "$ref": "#/components/schemas/ExecutedTrade",
+            "description": "Actual execution details (present once deposit confirmed)"
+          },
+          "EventLog": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Timestamped log of state transitions and notable events"
+          }
+        },
+        "required": ["TradeID", "Created", "Expires", "InputAsset", "OutputAsset", "OutputAddress", "InputAddress", "MaxInput", "QuotedPrice", "ExecutionState", "PriceInfo"]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string",
+            "enum": ["error"]
+          },
+          "error": {
+            "type": "string",
+            "description": "Description of the error"
+          }
+        },
+        "required": ["result", "error"]
+      }
+    }
+  }
+}

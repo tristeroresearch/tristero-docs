@@ -1,0 +1,85 @@
+---
+title: Feather Swaps
+description: Deposit-based swaps for UTXO-based chains
+---
+
+# Feather Swaps
+
+Feather swaps are deposit-based: you start an order to receive a `deposit_address`, send funds to it manually, then optionally wait for completion.
+
+## Start Swap (Get Deposit Address)
+
+### Submit Only
+
+```py
+import asyncio
+
+from tristero import ChainID, TokenSpec, start_feather_swap
+
+
+async def main() -> None:
+    # Example: ETH (native) -> XMR (native)
+    src_t = TokenSpec(chain_id=ChainID.ethereum, token_address="native")
+    dst_t = TokenSpec(chain_id=ChainID.monero, token_address="native")
+
+    # Replace with your own destination address on the destination chain.
+    dst_addr = "YOUR_XMR_ADDRESS"
+
+    swap = await start_feather_swap(
+        src_t=src_t,
+        dst_t=dst_t,
+        dst_addr=dst_addr,
+        raw_amount=100_000_000_000_000_000,  # 0.1 ETH in wei
+    )
+
+    order_id = (
+        (swap.data or {}).get("id")
+        or (swap.data or {}).get("order_id")
+        or (swap.data or {}).get("orderId")
+        or ""
+    )
+
+    print("order_id:", order_id)
+    print("deposit_address:", swap.deposit_address)
+
+
+asyncio.run(main())
+```
+
+### Submit + Wait (WebSocket)
+
+```py
+import asyncio
+
+from tristero import ChainID, OrderType, TokenSpec, start_feather_swap, wait_for_completion
+
+
+async def main() -> None:
+    src_t = TokenSpec(chain_id=ChainID.ethereum, token_address="native")
+    dst_t = TokenSpec(chain_id=ChainID.monero, token_address="native")
+    dst_addr = "YOUR_XMR_ADDRESS"
+
+    swap = await start_feather_swap(
+        src_t=src_t,
+        dst_t=dst_t,
+        dst_addr=dst_addr,
+        raw_amount=100_000_000_000_000_000,
+    )
+
+    order_id = (
+        (swap.data or {}).get("id")
+        or (swap.data or {}).get("order_id")
+        or (swap.data or {}).get("orderId")
+        or ""
+    )
+    if not order_id:
+        raise RuntimeError(f"Feather swap response missing order id: {swap.data}")
+
+    print("deposit_address:", swap.deposit_address)
+    print("Waiting for completion...")
+    async for update in wait_for_completion(order_id, order_type=OrderType.FEATHER):
+        print(update)
+
+
+asyncio.run(main())
+```
