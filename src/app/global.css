@@ -3,3 +3,9 @@
 @import 'fumadocs-ui/css/preset.css';
 @import 'fumadocs-openapi/css/preset.css';
 
+@theme {
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  --font-syne: var(--font-syne), sans-serif;
+  --text-lg: 0.9375rem;
+  --tw-prose-font-size: 0.875rem;
+}

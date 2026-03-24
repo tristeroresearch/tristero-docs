@@ -1,0 +1,43 @@
+.docs-layout h1,
+.docs-layout h2,
+.docs-layout h3,
+.docs-layout h4,
+.docs-layout header,
+.docs-layout aside > div > div > a {
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.docs-layout p,
+.docs-layout li {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.docs-layout .prose {
+  font-size: 0.875rem;
+}
+
+.dark .docs-layout {
+  --fd-background: #0a0a0a;
+  --color-fd-foreground: #ffffff;
+  --color-fd-border: rgba(255, 255, 255, 0.07);
+  --color-fd-muted: rgba(255, 255, 255, 0.05);
+  --color-fd-muted-foreground: rgba(255, 255, 255, 0.4);
+}
+
+.dark .docs-layout ul li::marker {
+  color: #E07830;
+}
+
+.dark .docs-layout [data-active="true"],
+.dark .docs-layout [data-active="true"] a,
+.dark .docs-layout a[data-active="true"],
+.dark .docs-layout [data-sidebar="group"][data-active="true"],
+.dark .docs-layout [data-sidebar="link"][data-active="true"] {
+  background: transparent;
+  border-left: 2px solid #E07830;
+  border-radius: 0;
+  padding-left: 14px;
+  color: #fff;
+}
