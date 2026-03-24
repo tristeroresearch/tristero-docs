@@ -1,4 +1,13 @@
 {
   "title": "API Reference",
-  "description": "Tristero API endpoints and usage"
+  "description": "Tristero API endpoints and usage",
+  "pages": [
+    "getQuote",
+    "fillOrder",
+    "getMarginQuote",
+    "getMarginPosition",
+    "getMarginPositions",
+    "closeMarginPosition",
+    "..."
+  ]
 }
