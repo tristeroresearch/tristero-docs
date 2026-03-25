@@ -5,27 +5,15 @@ description: Permissionless cross-chain swap relay primarily for connecting non-
 
 ## Overview
 
-Feather is a permissionless cross-chain swap relay primarily for connecting non-EVM cryptocurrency chains. Its architecture can handle any and every chain from standard EVM chains to obscure UTXO privacycoins. Right now it trades between coins like Bitcoin, Ethereum, Solana, Litecoin, and Monero at market rates with great prices and no custody or wallet connections.
+Feather is a permissionless cross-chain swap relay primarily for connecting non-EVM cryptocurrency chains. Its architecture can handle any and every chain from standard EVM chains to obscure UTXO privacycoins. It trades at market rates with great prices and requiring no custody or wallet connections.
 
 Feather uses a balance-sheet market making model where it holds a balance in each supported currency, adjusting prices to encourage rebalancing between supply and demand.
 
-The trade process is simple: you supply your output address, create a trade, and send funds to the provided deposit address. Feather will detect the deposit, convert the funds, and send you back the corresponding amount to your address on the other chain.
-
 Unlike bridging protocols or DEXes, there are no smart contracts, no cross-chain messaging, and no external liquidity providers. Feather simply watches for incoming deposits and sends the corresponding output from its own reserves. This may change in future as the system grows.
 
-## Supported Assets
-
-| Asset | Network |
-|---|---|
-| BTC | Bitcoin |
-| ETH | Ethereum |
-| USDC | Ethereum |
-| SOL | Solana |
-| LTC | Litecoin |
-| XMR | Monero |
-| TRX | Tron |
-
 ## Quick Start
+
+The trade process is simple: you supply your output address, create a trade, and send funds to the provided deposit address. Feather will detect the deposit, convert the funds, and send you back the corresponding amount to your address on the other chain.
 
 There are four API calls you may need to make when setting up and executing a trade:
 
@@ -54,7 +42,7 @@ Send funds to the `InputAddress` returned by `/trade` and Feather does the rest.
 
 ## Important Considerations
 
-**Liquidity Limits**: Feather uses its own balance sheet liquidity, so trade size is limited. The trade size limit is quoted out as `MaxInput` in the return from `/trade` or `/status`. DO NOT EXCEED THE QUOTED LIMIT.
+**Liquidity Limits**: Feather uses its own balance sheet liquidity, so trade size is limited. The trade size limit is quoted out as `MaxInput` in the return from `/trade` or `/status`. **DO NOT EXCEED THE QUOTED LIMIT**.
 
 **Overage Handling**: If you accidentally send more than Feather can process within its quoted trade size limit, Feather is in a tough position. If you have provided a return address, your trade will be aborted and your funds will be returned minus fees.
 

@@ -9,13 +9,14 @@
   letter-spacing: -0.02em;
 }
 
-.docs-layout p,
+.docs-layout .prose,
 .docs-layout li {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
 .docs-layout .prose {
   font-size: 0.875rem;
+  line-height: 1.35rem;
 }
 
 .dark .docs-layout {
