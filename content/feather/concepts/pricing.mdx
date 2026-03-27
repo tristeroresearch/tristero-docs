@@ -1,0 +1,36 @@
+---
+title: Pricing Model
+description: Feather's pricing model
+---
+
+Feather's balance sheet market making model means we can offer a very simple, predictable, and favorable pricing model for users:
+
+Conceptually, your trade seamlessly sells your input asset and then buys your output asset. Fees are collected before exchanging to pay for the transactions involved such that `in_amount = deposit_amount - fees`. The trade solves this equation to get your output amount:
+
+```
+in_amount * in_bid - 1/2 * in_impact * in_amount^2 =
+out_amount * out_ask + 1/2 * out_impact * out_amount^2
+```
+
+No opaque orderbook spreads, MEV, or unpredictable orderbook liquidity. Just one simple equation. The main complexity is the price impact model, which also affects the bid and ask prices for future trades. Both come from our balance price adjustment: as trades deplete or fill up our balance sheet in each asset, the price changes.
+
+We set a price adjustment so that when we are fully out of some asset or fully overfilled, arbitrageurs and price-sensitive users will be incentivised to rebalance us (and users who push us further out of balance pay for that subsidy). We make this adjustment as a simple linear function of balance:
+
+```
+price = (target-balance)*lambda + midprice
+```
+
+Applying a bid-ask spread and integrating that over the whole size of the trade gives us the above exchange half-equations. Lambda is an arbitrary parameter we set to calibrate exactly how much balance affects price. Integrating the price impact properly means a sequence of smaller trades (if they could be done without fees) has the same result as one big trade, giving us a very smooth and predictable trade price model: you pay the price that the assets had halfway through your trade. 
+
+Market prices and our balance sheet adjustments may fluctuate as market activity elsewhere and other trades on Feather both affect price. As such, the quotes you get from the [/price](/feather/api/getPrice) endpoint or on [trade creation](/feather/api/createTrade) are only an estimate. The final price parameters for your trade are only **fixed at the time your trade is executed**. The current prices, fees, and impact rates for each asset that go into the prices can be seen by grabbing the [/assets](/feather/api/getAssets) endpoint, resulting in a report something like this for each asset:
+
+```
+{
+  "AssetName": "BTC",
+  "UsdMarketMid": 68845,
+  "Bid": 68679.4764131515,
+  "Ask": 69369.7224072535,
+  "PriceImpactRate": 280808.673850367,
+  ...
+},
+```

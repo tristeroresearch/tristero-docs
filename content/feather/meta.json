@@ -1,5 +1,6 @@
 {
   "title": "Feather",
   "description": "Permissionless cross-chain swap relay documentation",
-  "root": true
+  "root": true,
+  "pages": ["index", "quickstart", "concepts", "api", "..."]
 }

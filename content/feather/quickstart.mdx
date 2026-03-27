@@ -1,0 +1,44 @@
+---
+title: Quickstart
+description: How to make your first Feather trade
+---
+
+# Quick Start
+
+The trade process is simple: you supply your output address, create a trade, and send funds to the provided deposit address. Feather will detect the deposit, convert the funds, and send you back the corresponding amount to your address on the other chain.
+
+## Using the Tristero Front End
+
+The easiest manual way to use Feather is directly from the [Tristero front end](https://tristero.com) ([tristero.com](https://tristero.com)). Just select two assets supported by Feather, and the UI will guide you to put in your destination and return addresses, quote outputs for specific amounts, and warn if anything is wrong.
+
+The Tristero system does not currently support automatic daisy-chaining from Tristero's smart contract routes to Feather's routes. However you can just manually make two trades in sequence via USDC or ETH to trade arbitrary EVM assets into or out of Feather's assets.
+
+## Using the Feather API Directly
+
+Feather is designed to be easy to integrate. Anything that can make HTTP requests and initiate funds transfer can trade via Feather. There are four API calls you may need to make when setting up and executing a trade. API calls should be made to `https://feather-prod.tristero.com`:
+
+**1. Get a list of supported assets**
+```http
+GET /assets
+```
+
+**2. Get a price quote**
+```http
+GET /price?input_asset=BTC&output_asset=ETH
+```
+
+**3. Create the trade — get a deposit address**
+```http
+POST /trade { "InputAsset": "BTC", "OutputAsset": "ETH", "OutputAddress": "0x..." }
+```
+
+**4. Poll for status**
+```http
+GET /status?id=<trade_id>
+```
+
+Send funds to the `InputAddress` returned by `/trade` and Feather does the rest.
+
+## Using the Tristero Python API
+
+See [the tristero python docs](/docs/tristero/python-sdk/feather-swaps) for how to call Feather from Tristero's Python API.

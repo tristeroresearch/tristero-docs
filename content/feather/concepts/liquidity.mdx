@@ -1,0 +1,12 @@
+---
+title: Liquidity Model
+description: Feather's balance sheet liquidity model
+---
+
+**Liquidity Limits**: Feather uses its own balance sheet liquidity, so trade size is limited. The trade size limit is quoted out as `MaxInput` in the return from `/trade` or `/status`. **DO NOT EXCEED THE QUOTED LIMIT**.
+
+
+**Overage Handling**: If you accidentally send more than Feather can process within its quoted trade size limit, Feather is in a tough position. If you have provided a return address, your trade will be aborted and your funds will be returned minus fees.
+
+
+**Fees**: Feather charges fees roughly matching what it costs us to execute the trade, including any funds consolidation from deposit addresses to the main wallet. All fees are deducted from your deposit before the exchange calculation.
