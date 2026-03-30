@@ -1,0 +1,6 @@
+@reference "#app.css";
+.noisegradient {
+    @apply w-full h-full absolute top-0 left-0 transition-all duration-150;
+    background-image: url("/noisegradient.jpg");
+    mask-image: radial-gradient(circle at 150% -50%, black, transparent 50%);
+}

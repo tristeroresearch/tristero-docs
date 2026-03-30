@@ -1,0 +1,1353 @@
+{
+    "abstract": {
+        "chainId": 2741,
+        "display": "Abstract",
+        "lzSrcId": 30324,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x3439153EB7AF838Ad19d56E1571FBD09333C2809",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "ancient8": {
+        "chainId": 888888888,
+        "display": "Ancient8",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "apechain": {
+        "chainId": 33139,
+        "display": "ApeChain",
+        "lzSrcId": 30312,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x48b62137EdfA95a428D35C09E44256a739F6B557",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "APE",
+        "gasTokenName": "ApeCoin"
+    },
+    "arbitrum": {
+        "chainId": 42161,
+        "display": "Arbitrum",
+        "lzSrcId": 30110,
+        "cctpV2Domain": 3,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "arbitrum_nova": {
+        "chainId": 42170,
+        "display": "Arbitrum Nova",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x765277eebeca2e31912c9946eae1021199b39c61",
+                "decimals": 18
+            }
+        },
+        "icon": "/assets/network/arbitrum-nova.png",
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "aurora": {
+        "chainId": 1313161554,
+        "display": "Aurora",
+        "lzSrcId": 30211,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xc9bdeed33cd01541e1eed10f90519d2c06fe3feb",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "avalanche": {
+        "chainId": 43114,
+        "display": "Avalanche",
+        "lzSrcId": 30106,
+        "cctpV2Domain": 1,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "AVAX",
+        "gasTokenName": "Avalanche"
+    },
+    "base": {
+        "chainId": 8453,
+        "display": "Base",
+        "lzSrcId": 30184,
+        "cctpV2Domain": 6,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "berachain": {
+        "chainId": 80094,
+        "display": "Berachain",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x6969696969696969696969696969696969696969",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "BERA",
+        "gasTokenName": "Berachain"
+    },
+    "bitcoin": {
+        "chainId": 8332,
+        "display": "Bitcoin",
+        "vmType": "UTXO",
+        "addresses": {},
+        "flags": {
+            "walletConnect": false,
+            "featherAssets": [
+                "native"
+            ]
+        },
+        "gasTokenSymbol": "BTC",
+        "gasTokenName": "Bitcoin",
+        "txExplorerUrl": "https://mempool.space/tx/{tx}",
+        "depositUriFormat": "bitcoin:{address}?amount={amount}"
+    },
+    "blast": {
+        "chainId": 81457,
+        "display": "Blast",
+        "lzSrcId": 30243,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4300000000000000000000000000000000000004",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "bob": {
+        "chainId": 60808,
+        "display": "BOB",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "boba": {
+        "chainId": 288,
+        "display": "Boba",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "bsc": {
+        "chainId": 56,
+        "display": "BSC",
+        "lzSrcId": 30102,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "BNB",
+        "gasTokenName": "BNB"
+    },
+    "celo": {
+        "chainId": 42220,
+        "display": "Celo",
+        "lzSrcId": 30125,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xcebA9300f2b948710d2653dD7B07f33A8B32118C",
+                "decimals": 6
+            },
+            "native": "0x471EcE3750Da237f93B8E339c536989b8978a438"
+        },
+        "gasTokenSymbol": "CELO",
+        "gasTokenName": "Celo"
+    },
+    "codex": {
+        "chainId": 81224,
+        "display": "Codex",
+        "lzSrcId": 30323,
+        "cctpV2Domain": 12,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "cronos": {
+        "chainId": 25,
+        "display": "Cronos",
+        "lzSrcId": 30359,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "CRO",
+        "gasTokenName": "Cronos"
+    },
+    "cyber": {
+        "chainId": 7560,
+        "display": "Cyber",
+        "lzSrcId": 30282,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "degen": {
+        "chainId": 666666666,
+        "display": "Degen",
+        "lzSrcId": 30315,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xeb54dacb4c2ccb64f8074eceea33b5ebb38e5387",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "DEGEN",
+        "gasTokenName": "Degen"
+    },
+    "ethereum": {
+        "chainId": 1,
+        "display": "Ethereum",
+        "lzSrcId": 30101,
+        "cctpV2Domain": 0,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+                "decimals": 6
+            },
+            "usdt": {
+                "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether",
+        "depositUriFormat": "ethereum:{address}@1?value={base_token_amount}",
+        "flags": {
+            "featherAssets": [
+                "native",
+                "usdc",
+                "usdt"
+            ]
+        }
+    },
+    "fiat": {
+        "chainId": 999999,
+        "display": "Fiat",
+        "vmType": "Fiat",
+        "addresses": {},
+        "icon": "/assets/fiat/FiatCurrency_USD.png",
+        "gasTokenSymbol": "USD",
+        "gasTokenName": "US Dollar"
+    },
+    "flare": {
+        "chainId": 14,
+        "display": "Flare",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x1d80c49bbbcd1c0911346656b529df9e5c2f783d",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "FLR",
+        "gasTokenName": "Flare"
+    },
+    "flow": {
+        "chainId": 747,
+        "display": "Flow",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xd3bf53dac106a0290b0483ecbc89d40fcc961f3e",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "FLOW",
+        "gasTokenName": "Flow"
+    },
+    "fraxtal": {
+        "chainId": 252,
+        "display": "Fraxtal",
+        "lzSrcId": 30255,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xFc00000000000000000000000000000000000002",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "frxETH",
+        "gasTokenName": "Frax Ether"
+    },
+    "funkichain": {
+        "chainId": 33979,
+        "display": "Funkichain",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "icon": "/assets/network/funki.png",
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "fuse": {
+        "chainId": 122,
+        "display": "Fuse",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x0BE9e53fd7EDaC9F859882AfdDa116645287C629",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "FUSE",
+        "gasTokenName": "Fuse"
+    },
+    "gnosis": {
+        "chainId": 100,
+        "display": "Gnosis",
+        "lzSrcId": 30145,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "xDAI",
+        "gasTokenName": "xDAI"
+    },
+    "hyperevm": {
+        "chainId": 999,
+        "display": "HyperEVM",
+        "lzSrcId": 30367,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x5555555555555555555555555555555555555555",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "HYPE",
+        "gasTokenName": "Hyperliquid"
+    },
+    "injevm": {
+        "chainId": 1776,
+        "display": "Injective EVM",
+        "addresses": {
+            "permit2": "0x7888888Bca4EFBA996191CDDe167e9F30d3866ba",
+            "wrappedGasToken": {
+                "address": "0x0000000088827d2d103ee2d9A6b781773AE03FfB",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "INJ",
+        "gasTokenName": "Injective"
+    },
+    "ink": {
+        "chainId": 57073,
+        "display": "Ink",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "katana": {
+        "chainId": 747474,
+        "display": "Katana",
+        "lzSrcId": 30375,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xEE7D8BCFb72bC1880D0Cf19822eB0A2e6577aB62",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "kava": {
+        "chainId": 2222,
+        "display": "Kava",
+        "lzSrcId": 30177,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xc86c7c0efbd6a49b35e8714c5f59d99de09a225b",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "KAVA",
+        "gasTokenName": "Kava"
+    },
+    "linea": {
+        "chainId": 59144,
+        "display": "Linea",
+        "lzSrcId": 30183,
+        "cctpV2Domain": 11,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0x176211869cA2b568f2A7D4EE941E073a821EE1ff",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "lisk": {
+        "chainId": 1135,
+        "display": "Lisk",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "litecoin": {
+        "chainId": 10333,
+        "display": "Litecoin",
+        "vmType": "UTXO",
+        "addresses": {},
+        "flags": {
+            "walletConnect": false,
+            "featherAssets": [
+                "native"
+            ]
+        },
+        "gasTokenSymbol": "LTC",
+        "gasTokenName": "Litecoin",
+        "txExplorerUrl": "https://litecoinspace.org/tx/{tx}",
+        "depositUriFormat": "litecoin:{address}?amount={amount}"
+    },
+    "manta_pacific": {
+        "chainId": 169,
+        "display": "Manta",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x0Dc808adcE2099A9F62AA87D9670745AbA741746",
+                "decimals": 18
+            }
+        },
+        "icon": "/assets/network/manta.png",
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "mantle": {
+        "chainId": 5000,
+        "display": "Mantle",
+        "lzSrcId": 30181,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x78c1b0c915c4faa5fffa6cabf0219da63d7f4cb8",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "MNT",
+        "gasTokenName": "Mantle"
+    },
+    "megaeth": {
+        "chainId": 4326,
+        "display": "MegaETH",
+        "addresses": {
+            "permit2": "0x7888888Bca4EFBA996191CDDe167e9F30d3866ba",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "metis": {
+        "chainId": 1088,
+        "display": "Metis",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x75cb093e4d61d2a2e65d8e0bbb01de8d89b53481",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "METIS",
+        "gasTokenName": "Metis"
+    },
+    "mint": {
+        "chainId": 185,
+        "display": "Mint",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "mode": {
+        "chainId": 34443,
+        "display": "Mode",
+        "lzSrcId": 30260,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "monad": {
+        "chainId": 143,
+        "display": "Monad",
+        "lzSrcId": 30390,
+        "cctpV2Domain": 15,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x3bd359C1119dA7Da1D913D1C4D2B7c461115433A",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "MON",
+        "gasTokenName": "Monad"
+    },
+    "monero": {
+        "chainId": 18081,
+        "display": "Monero",
+        "vmType": "UTXO",
+        "addresses": {},
+        "flags": {
+            "walletConnect": false,
+            "featherAssets": [
+                "native"
+            ]
+        },
+        "gasTokenSymbol": "XMR",
+        "gasTokenName": "Monero",
+        "txExplorerUrl": "https://moneroexplorer.org/#/transaction/{tx}",
+        "depositUriFormat": "monero:{address}?tx_amount={amount}"
+    },
+    "moonriver": {
+        "chainId": 1285,
+        "display": "Moonriver",
+        "lzSrcId": 30167,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x98878B06940aE243284CA214f92Bb71a2b032B8A",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "MOVR",
+        "gasTokenName": "Moonriver"
+    },
+    "moonbeam": {
+        "chainId": 1284,
+        "display": "Moonbeam",
+        "lzSrcId": 30167,
+        "addresses": {
+            "permit2": "0xcA11bde05977b3631167028862bE2a173976CA11",
+            "wrappedGasToken": {
+                "address": "0xAcc15dC74880C9944775448304B263D191c6077F",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "GLMR",
+        "gasTokenName": "Moonbeam"
+    },
+    "opbnb": {
+        "chainId": 204,
+        "display": "opBNB",
+        "lzSrcId": 30202,
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "BNB",
+        "gasTokenName": "BNB"
+    },
+    "optimism": {
+        "chainId": 10,
+        "display": "Optimism",
+        "lzSrcId": 30111,
+        "cctpV2Domain": 2,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "plasma": {
+        "chainId": 9745,
+        "display": "Plasma",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x6100E367285b01F48D07953803A2d8dCA5D19873",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "XPL",
+        "gasTokenName": "Plasma"
+    },
+    "plume": {
+        "chainId": 98866,
+        "display": "Plume",
+        "lzSrcId": 30370,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xEa237441c92CAe6FC17Caaf9a7acB3f953be4bd1",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "PLUME",
+        "gasTokenName": "Plume"
+    },
+    "polygon": {
+        "chainId": 137,
+        "display": "Polygon",
+        "lzSrcId": 30109,
+        "cctpV2Domain": 7,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "POL",
+        "gasTokenName": "Polygon"
+    },
+    "polygon_zkevm": {
+        "chainId": 1101,
+        "display": "Polygon zkEVM",
+        "lzSrcId": 30158,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4f9a0e7fd2bf6067db6994cf12e4495df938e6e9",
+                "decimals": 18
+            }
+        },
+        "flags": {
+            "mcopyError": true
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "polynomial": {
+        "chainId": 8008,
+        "display": "Polynomial",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "redstone": {
+        "chainId": 690,
+        "display": "Redstone",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "ronin": {
+        "chainId": 2020,
+        "display": "Ronin",
+        "lzSrcId": 30178,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xe514d9deb7966c8be0ca922de8a064264ea6bcd4",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "RON",
+        "gasTokenName": "Ronin"
+    },
+    "rootstock": {
+        "chainId": 30,
+        "display": "Rootstock",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x1945d8aedc005c900c796e31cce040363a6658d2",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "RBTC",
+        "gasTokenName": "Rootstock Bitcoin"
+    },
+    "scroll": {
+        "chainId": 534352,
+        "display": "Scroll",
+        "lzSrcId": 30214,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x5300000000000000000000000000000000000004",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "sei": {
+        "chainId": 1329,
+        "display": "Sei",
+        "lzSrcId": 30280,
+        "cctpV2Domain": 16,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xE30feDd158A2e3b13e9badaeABaFc5516e95e8C7",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "SEI",
+        "gasTokenName": "Sei"
+    },
+    "solana": {
+        "chainId": 1151111081099710,
+        "display": "Solana",
+        "vmType": "Solana",
+        "lzSrcId": 30168,
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "So11111111111111111111111111111111111111112",
+                "decimals": 9
+            },
+            "usdc": {
+                "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "SOL",
+        "gasTokenName": "Solana",
+        "txExplorerUrl": "https://solscan.io/tx/{tx}",
+        "depositUriFormat": "solana:{address}?amount={amount}",
+        "flags": {
+            "featherAssets": [
+                "native"
+            ]
+        }
+    },
+    "soneium": {
+        "chainId": 1868,
+        "display": "Soneium",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "sonic": {
+        "chainId": 146,
+        "display": "Sonic",
+        "lzSrcId": 30332,
+        "cctpV2Domain": 13,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "S",
+        "gasTokenName": "Sonic"
+    },
+    "stable": {
+        "chainId": 988,
+        "display": "Stable",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x817997Ca8394E26CCE3dE3A076a4889b27DbF9dE",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "USDT0",
+        "gasTokenName": "USDT0"
+    },
+    "sui": {
+        "chainId": 9270000000000000,
+        "display": "Sui",
+        "addresses": {},
+        "gasTokenSymbol": "SUI",
+        "gasTokenName": "Sui"
+    },
+    "swell": {
+        "chainId": 1923,
+        "display": "Swell",
+        "lzSrcId": 30335,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "taiko": {
+        "chainId": 167000,
+        "display": "Taiko",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0xA51894664A773981C6C112C43ce576f315d5b1B6",
+                "decimals": 18
+            }
+        },
+        "flags": {
+            "mcopyError": true
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "telos": {
+        "chainId": 40,
+        "display": "Telos",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "TLOS",
+        "gasTokenName": "Telos"
+    },
+    "tron": {
+        "chainId": 728126428,
+        "display": "Tron",
+        "lzSrcId": 30420,
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+                "decimals": 6
+            },
+            "usdt": {
+                "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+                "decimals": 6
+            },
+            "native": "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb"
+        },
+        "flags": {
+            "walletConnect": false,
+            "featherAssets": [
+                "native",
+                "usdt"
+            ]
+        },
+        "gasTokenSymbol": "TRX",
+        "gasTokenName": "Tron",
+        "txExplorerUrl": "https://tronscan.org/#/transaction/{tx}",
+        "depositUriFormat": "tron:{address}?amount={amount}"
+    },
+    "unichain": {
+        "chainId": 130,
+        "display": "Unichain",
+        "lzSrcId": 30320,
+        "cctpV2Domain": 10,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0x078D782b760474a361dDA0AF3839290b0EF57AD6",
+                "decimals": 6
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "wemix": {
+        "chainId": 1111,
+        "display": "Wemix",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "WEMIX",
+        "gasTokenName": "Wemix"
+    },
+    "worldchain": {
+        "chainId": 480,
+        "display": "Worldchain",
+        "lzSrcId": 30319,
+        "cctpV2Domain": 14,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "x_layer": {
+        "chainId": 196,
+        "display": "X-Layer",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x5a77f1443d16ee5761d310e38b62f77f726bc71c",
+                "decimals": 18
+            }
+        },
+        "icon": "/assets/network/xlayer.png",
+        "gasTokenSymbol": "OKB",
+        "gasTokenName": "OKB"
+    },
+    "xdc": {
+        "chainId": 50,
+        "display": "XDC",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x951857744785e80e2de051c32ee7b25f9c458c42",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "XDC",
+        "gasTokenName": "XDC"
+    },
+    "zcash": {
+        "chainId": 8233,
+        "display": "ZCash",
+        "vmType": "UTXO",
+        "addresses": {},
+        "flags": {
+            "walletConnect": false,
+            "featherAssets": [
+                "native"
+            ]
+        },
+        "gasTokenSymbol": "ZEC",
+        "gasTokenName": "ZCash",
+        "txExplorerUrl": "https://mainnet.zcashexplorer.app/transactions/{tx}",
+        "depositUriFormat": "zcash:{address}?amount={amount}"
+    },
+    "zero_g": {
+        "chainId": 16661,
+        "display": "0G",
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x1cd0690ff9a693f5ef2dd976660a8dafc81a109c",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "0G",
+        "gasTokenName": "Zero Gravity"
+    },
+    "zksync_era": {
+        "chainId": 324,
+        "display": "zkSync Era",
+        "lzSrcId": 30165,
+        "addresses": {
+            "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+            "wrappedGasToken": {
+                "address": "0x5aea5775959fbc2557cc8789bc1bf90a239d9a91",
+                "decimals": 18
+            },
+            "usdc": {
+                "address": "0x1d17CBcF0D6D143135aE902365D2E5e2A16538D4",
+                "decimals": 6
+            }
+        },
+        "flags": {
+            "mcopyError": true
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "zora": {
+        "chainId": 7777777,
+        "display": "Zora",
+        "addresses": {
+            "wrappedGasToken": {
+                "address": "0x4200000000000000000000000000000000000006",
+                "decimals": 18
+            }
+        },
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "fantom": {
+        "chainId": 250,
+        "display": "Fantom",
+        "addresses": {},
+        "gasTokenSymbol": "FTM",
+        "gasTokenName": "Fantom"
+    },
+    "harmony": {
+        "chainId": 1666600000,
+        "display": "Harmony",
+        "addresses": {},
+        "gasTokenSymbol": "ONE",
+        "gasTokenName": "Harmony"
+    },
+    "zksync": {
+        "chainId": 324,
+        "display": "zkSync",
+        "addresses": {},
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "arena_z": {
+        "chainId": 7897,
+        "display": "Arena-z",
+        "addresses": {},
+        "gasTokenSymbol": "ARENA",
+        "gasTokenName": "Arena"
+    },
+    "astar": {
+        "chainId": 592,
+        "display": "Astar",
+        "addresses": {},
+        "gasTokenSymbol": "ASTR",
+        "gasTokenName": "Astar"
+    },
+    "immutable_zkevm": {
+        "chainId": 13371,
+        "display": "Immutable zkEVM",
+        "addresses": {},
+        "gasTokenSymbol": "IMX",
+        "gasTokenName": "Immutable X"
+    },
+    "kaia": {
+        "chainId": 8217,
+        "display": "Kaia",
+        "addresses": {},
+        "gasTokenSymbol": "KAIA",
+        "gasTokenName": "Kaia"
+    },
+    "pulsechain": {
+        "chainId": 369,
+        "display": "PulseChain",
+        "addresses": {},
+        "gasTokenSymbol": "PLS",
+        "gasTokenName": "PulseChain"
+    },
+    "zeta": {
+        "chainId": 7000,
+        "display": "ZetaChain",
+        "addresses": {},
+        "gasTokenSymbol": "ZETA",
+        "gasTokenName": "Zeta"
+    },
+    "bitlayer": {
+        "chainId": 200901,
+        "display": "Bitlayer",
+        "addresses": {},
+        "gasTokenSymbol": "BTC",
+        "gasTokenName": "Bitcoin"
+    },
+    "bittorrent": {
+        "chainId": 199,
+        "display": "BitTorrent",
+        "addresses": {},
+        "gasTokenSymbol": "BTT",
+        "gasTokenName": "BitTorrent"
+    },
+    "evmos": {
+        "chainId": 9001,
+        "display": "Evmos",
+        "addresses": {},
+        "gasTokenSymbol": "EVMOS",
+        "gasTokenName": "Evmos"
+    },
+    "thundercore": {
+        "chainId": 108,
+        "display": "ThunderCore",
+        "addresses": {},
+        "gasTokenSymbol": "TT",
+        "gasTokenName": "ThunderCore"
+    },
+    "viction": {
+        "chainId": 88,
+        "display": "Viction",
+        "addresses": {},
+        "gasTokenSymbol": "VIC",
+        "gasTokenName": "Viction"
+    },
+    "dymension": {
+        "chainId": 1100,
+        "display": "Dymension",
+        "addresses": {},
+        "gasTokenSymbol": "DYM",
+        "gasTokenName": "Dymension"
+    },
+    "etherlink": {
+        "chainId": 42793,
+        "display": "Etherlink",
+        "addresses": {},
+        "gasTokenSymbol": "XTZ",
+        "gasTokenName": "Tezos"
+    },
+    "lens": {
+        "chainId": 232,
+        "display": "Lens",
+        "addresses": {},
+        "gasTokenSymbol": "GRASS",
+        "gasTokenName": "Grass"
+    },
+    "nibiru": {
+        "chainId": 6900,
+        "display": "Nibiru",
+        "addresses": {},
+        "gasTokenSymbol": "NIBI",
+        "gasTokenName": "Nibiru"
+    },
+    "peaq": {
+        "chainId": 3338,
+        "display": "Peaq",
+        "addresses": {},
+        "gasTokenSymbol": "PEAQ",
+        "gasTokenName": "Peaq"
+    },
+    "corn": {
+        "chainId": 21000000,
+        "display": "Corn",
+        "addresses": {},
+        "gasTokenSymbol": "CORN",
+        "gasTokenName": "Corn"
+    },
+    "cronos_zkevm": {
+        "chainId": 388,
+        "display": "Cronos zkEVM",
+        "addresses": {},
+        "gasTokenSymbol": "CRO",
+        "gasTokenName": "Cronos"
+    },
+    "forma": {
+        "chainId": 984122,
+        "display": "Forma",
+        "addresses": {},
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "gravity": {
+        "chainId": 1625,
+        "display": "Gravity",
+        "addresses": {},
+        "gasTokenSymbol": "G",
+        "gasTokenName": "Gravity"
+    },
+    "sophon": {
+        "chainId": 50104,
+        "display": "Sophon",
+        "addresses": {},
+        "gasTokenSymbol": "SOPH",
+        "gasTokenName": "Sophon"
+    },
+    "bevm": {
+        "chainId": 1501,
+        "display": "Bevm",
+        "addresses": {},
+        "gasTokenSymbol": "BTC",
+        "gasTokenName": "Bitcoin"
+    },
+    "botanix": {
+        "chainId": 3637,
+        "display": "Botanix",
+        "addresses": {},
+        "gasTokenSymbol": "BTC",
+        "gasTokenName": "Bitcoin"
+    },
+    "saakuru": {
+        "chainId": 7225878,
+        "display": "Saakuru",
+        "addresses": {},
+        "gasTokenSymbol": "SAK",
+        "gasTokenName": "Saakuru"
+    },
+    "satoshivm": {
+        "chainId": 3109,
+        "display": "SatoshiVM",
+        "addresses": {},
+        "gasTokenSymbol": "BTC",
+        "gasTokenName": "Bitcoin"
+    },
+    "zklink_nova": {
+        "chainId": 810180,
+        "display": "zkLink Nova",
+        "addresses": {},
+        "gasTokenSymbol": "ETH",
+        "gasTokenName": "Ether"
+    },
+    "humanity": {
+        "chainId": 1942999413,
+        "display": "Humanity",
+        "addresses": {},
+        "gasTokenSymbol": "H",
+        "gasTokenName": "Humanity"
+    }
+}

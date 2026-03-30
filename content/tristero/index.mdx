@@ -1,14 +1,71 @@
 ---
-title: Tristero
-description: Tristero trading library documentation
+title: Tristero Introduction
+description: Cross-chain trading API for spot swaps, margin positions, and non-EVM asset exchanges
 ---
+import { TristeroChains } from '@/config/tristero-chains'
 
-# Tristero
+**Tristero** is a trading platform that aims to let you do everything that you would do on a centralized exchange, permissionlessly and without DeFi risks: You can execute spot swaps, open leveraged margin positions, and swap into non-EVM assets like BTC, XMR, and LTC — all through a single interface.
 
-Tristero's trading library and API documentation.
+## Using Tristero
+
+### Spot trading
+
+Using Tristero, you can swap any ERC-20 token across supported EVM chains using Uniswap's Permit2 standard. No token approval transactions needed — sign an EIP-712 message and Tristero handles execution.
+
+- Cross-chain: swap USDC on Arbitrum for USDT on Base
+- Same-chain: swap USDC for WETH on Arbitrum
+- Native ETH support
+- Real-time quote streaming via WebSocket (~500ms updates)
+
+Tristero's DeFI swap protocol supports the following EVM chains: **{TristeroChains.map(x => x.name).join(", ")}**
+<TristeroTokenList />
+
+### Margin trading
+
+Open leveraged positions using any ERC-20 as collateral. Go long on Bitcoin with up to 5x leverage, funded by USDC loans with transparent annual interest rates.
+
+- Any ERC-20 as collateral
+- Configurable leverage ratios
+- Partial or full position closes
+- Cash settlement or swap settlement
+
+### Feather (cross-L1 swaps)
+
+[Feather](/docs/feather) is a permissionless cross-chain relay for swapping into and out of non-EVM assets. No smart contracts, no LPs, no wallet connections — deposit to an address, receive output from Feather's reserves.
+
+**Supported assets:** BTC, ETH, USDC, SOL, LTC, TRX, USDT (Tron), XMR
+
+Feather uses a balance-sheet market making model: it holds reserves in each currency and adjusts pricing to stay balanced. This means it can support chains that bridges and DEXes typically can't — including UTXO chains and privacy coins.
+
+## Getting started
+
+The fastest way to integrate is through the Python SDK:
+
+```bash
+pip install tristero
+```
+
+The SDK provides high-level functions for each trade type:
+
+| Trade type | SDK function |
+|---|---|
+| Spot swap | `execute_permit2_swap()` |
+| Margin open | `open_margin_position()` |
+| Margin close | `close_margin_position()` |
+| Feather swap | `start_feather_swap()` |
+
+All functions are async and support three environments: production (`api.tristero.com/v2`), staging, and local.
+
+Feather has its own [4-endpoint API](/docs/feather/api) for asset listing, pricing, trade creation, and status polling.
 
 <Cards>
   <Card title="Python SDK" href="/docs/tristero/python-sdk">
-    Python SDK for trading with Tristero
+    Installation, configuration, and usage guides for the Python SDK
+  </Card>
+  <Card title="Feather" href="/docs/feather">
+    Cross-L1 swap relay for non-EVM assets
+  </Card>
+  <Card title="API Reference" href="/docs/tristero/api">
+    Full Tristero REST API reference
   </Card>
 </Cards>
