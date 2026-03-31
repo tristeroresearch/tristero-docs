@@ -1,6 +1,15 @@
+import type { Metadata } from 'next';
 import { Inter, IBM_Plex_Mono, Syne } from 'next/font/google';
 import { Provider } from '@/components/provider';
 import './global.css';
+
+export const metadata: Metadata = {
+  icons: {
+    icon: '/tristero.png',
+    shortcut: '/tristero.png',
+    apple: '/tristero.png',
+  },
+};
 
 const inter = Inter({
   subsets: ['latin'],

@@ -3,10 +3,10 @@ title: Liquidity and Returns
 description: Feather's balance sheet liquidity model
 ---
 
-If you provided a return address for your trade, there are a number of anomalous circumstances under which your input deposit will be returned:
+If you provided a return address for your trade, there are a number of anomalous circumstances involving liquidity problems under which your input deposit will be returned:
 
 *  If you go over the quoted trade size limit (`MaxInput`), your deposit will be returned and the trade will not be executed. If you did not provide a return address, you will lose money in this circumstance as we will be unable to exchange more than the quoted amount. You can simulate the result of a certain amount by using the `/price` endpoint.
 
 *  If you are within the quoted limit but Feather does not at that time have enough of that asset on the balance sheet to complete your trade, your input funds will be returned instead. If you did not provide a return address, Feather will wait until enough output liquidity becomes available, and then send your funds.
 
-Once your input is accepted and we commit to the trade, we guarantee that it will go through. See the documentation for the [Feather state machine](states).
+Once your input is accepted and we commit to the trade, we guarantee that it will go through. See the documentation for the [Feather state machine](states) for details.

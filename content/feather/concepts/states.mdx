@@ -38,8 +38,7 @@ There are also a few exceptional states:
 | `Send Failed` | Output transaction failed to broadcast. Retrying. |
 | `Cancelling Failed Transaction` | Broadcast failed or timed out. Cancelling and reissuing. |
 
-
-It's possible for transactions to fail or get stuck for a variety of reasons. If a transaction fails or times out, Feather ensures that it is cancelled securely and then retries. 
+We gaurantee that once your input deposit is accepted, you will definitely receive your output funds. It's possible for transactions to fail or get stuck for a variety of reasons. If this happens, Feather ensures that the transaction is safely cancelled and then persistently retried until it succeeds. 
 
 Trades expire (`ExecutionState: "Expired"`) if no deposit arrives within 2 hours of creation. An expired trade is simply abandoned. If a deposit arrives after expiry but within a grace period, Feather will still honor it.
 

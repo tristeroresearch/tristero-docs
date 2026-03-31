@@ -2,10 +2,16 @@
 title: Feather Overview
 description: Permissionless cross-chain swap relay primarily for connecting non-EVM cryptocurrency chains
 ---
+import { FeatherAssets } from '@/config/tristero-chains'
 
 ## What is Feather?
 
 Feather is a permissionless cross-chain swap relay primarily for connecting non-EVM cryptocurrency chains. Its architecture can handle any and every chain from standard EVM chains to obscure UTXO privacycoins. It trades at market rates with great prices and requiring no custody or wallet connections.
+
+Feather enables trading between the following assets: **{FeatherAssets.map(x => x.name).join(", ")}**
+
+<FeatherTokenList />
+
 
 Feather uses a balance-sheet market making model where it holds a balance in each supported currency, adjusting prices to encourage rebalancing between supply and demand.
 
