@@ -3,42 +3,14 @@ title: Trade State Machine
 description: The different states the system can be in and their transitions
 ---
 
-When you create a trade, it goes through a series of execution states that ensure that your trade will succeed even in the case of anomalies:
+import stateMachine from '../../../public/feather-statemachine.svg'
+import Image from 'next/image';
 
-```
-POST /trade
-    |
-    v
-Awaiting Deposit
-    |  deposit seen in mempool
-    v
-Awaiting Deposit Confirmation
-    |  deposit confirmed on-chain
-    v
-Awaiting Liquidity ─────── (waits if output reserve is low)
-    |  liquidity available, tx constructed
-    v
-Sending Transaction
-    |  tx broadcast
-    v
-Awaiting Confirmation
-    |  output tx confirmed
-    v
-Confirmed
-    |  output tx finalized
-    v
-Finalized  ✓
-```
+Feather was designed with robustness in mind. When you create a trade, it goes through a series of execution states that ensure that your trade will succeed even in the case of anomalies:
 
-There are also a few exceptional states:
+<Image priority src={stateMachine} alt="Feather State Machine" />
 
-| State | Meaning |
-|---|---|
-| `Expired` | No deposit arrived before the trade expiry window (2 hours). |
-| `Send Failed` | Output transaction failed to broadcast. Retrying. |
-| `Cancelling Failed Transaction` | Broadcast failed or timed out. Cancelling and reissuing. |
-
-We gaurantee that once your input deposit is accepted, you will definitely receive your output funds. It's possible for transactions to fail or get stuck for a variety of reasons. If this happens, Feather ensures that the transaction is safely cancelled and then persistently retried until it succeeds. 
+We guarantee that once your input deposit is accepted, you will definitely receive your output funds. It's possible for transactions to fail or get stuck for a variety of reasons. If this happens, Feather ensures that the transaction is safely cancelled and then persistently retried until it succeeds. 
 
 Trades expire (`ExecutionState: "Expired"`) if no deposit arrives within 2 hours of creation. An expired trade is simply abandoned. If a deposit arrives after expiry but within a grace period, Feather will still honor it.
 
