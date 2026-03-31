@@ -6,9 +6,9 @@ import "katex/dist/katex.css";
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/tristero.png",
-    shortcut: "/tristero.png",
-    apple: "/tristero.png",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
 };
 

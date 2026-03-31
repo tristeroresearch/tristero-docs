@@ -10,6 +10,18 @@
     background-image: url(/hero-gradient.png);
     rotate: 180deg;
     filter: contrast(1);
-    background-position: 0% 50%;
+    background-position: 1% 40%;
     mask-image: radial-gradient(circle at 0% -0%, black, transparent 80%);
+}
+
+.herobackground::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2' numOctaves='8' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+    background-size: 500px 500px;
+    mix-blend-mode: soft-light; /* or soft-light for subtle effect */
+    pointer-events: none;
+    /* Inherit mask so noise fades with the gradient */
+    mask-image: inherit;
 }

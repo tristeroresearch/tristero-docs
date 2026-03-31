@@ -2,10 +2,11 @@
   "title": "Python SDK",
   "description": "Python SDK for the Tristero trading library",
   "pages": [
-    "configuration",
     "spot-swaps",
     "margin-trading",
+    "feather-swaps",
     "websocket-streaming",
+    "configuration",
     "..."
   ]
 }
