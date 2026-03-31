@@ -1,9 +1,0 @@
----
-title: Retries and Returns
-description: How Feather handles anomalies to guarantee fulfilment
----
-
-**Returns**: If a deposit arrives but Feather cannot complete the swap and a `ReturnAddress` was provided, Feather will return the deposit (minus input chain fees) to that address.
-
-
-**Guaranteed exactly-once execution**: Once a deposit is confirmed and liquidity is available, Feather constructs and broadcasts the output transaction. It monitors that transaction through to `ExecutionState: "Finalized"`.

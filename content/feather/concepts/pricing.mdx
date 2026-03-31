@@ -5,7 +5,7 @@ description: Feather's pricing model
 
 Feather's balance sheet market making model means we can offer a very simple, predictable, and favorable pricing model for users:
 
-Conceptually, your trade seamlessly sells your input asset and then buys your output asset. Fees are collected before exchanging to pay for the transactions involved such that `in_amount = deposit_amount - fees`. The trade solves this equation to get your output amount:
+Conceptually, your trade seamlessly sells your input asset and then buys your output asset. Fees are deducted from your input amount before exchanging to pay for the transactions involved. The trade solves this equation to get your output amount:
 
 ```
 in_amount * in_bid - 1/2 * in_impact * in_amount^2 =
