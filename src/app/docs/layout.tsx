@@ -14,9 +14,9 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
           transform: (option, node) => ({
             ...option,
             icon: (
-              <div className="w-5 h-5 p-1 bg-white/10 rounded-sm">
+              <div className="w-5 h-5 p-1 bg-black/10 dark:bg-white/10 rounded-sm">
                 {node.$id === "tristero" ? (
-                  <TristeroIcon className="grayscale invert" />
+                  <TristeroIcon className="grayscale dark:invert" />
                 ) : (
                   <FeatherIcon />
                 )}
