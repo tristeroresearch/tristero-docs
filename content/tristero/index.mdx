@@ -2,27 +2,134 @@
 title: Tristero Introduction
 description: Cross-chain trading API for spot swaps, margin positions, and non-EVM asset exchanges
 ---
-import { TristeroChains } from '@/config/tristero-chains'
+import { TristeroChains, FeatherAssets } from '@/config/tristero-chains'
 
-**Tristero** is a trading platform that aims to let you do everything that you would do on a centralized exchange, permissionlessly and without DeFi risks: You can execute spot swaps, open leveraged margin positions, and swap into non-EVM assets like BTC, XMR, and LTC — all through a single interface.
+Tristero is a trustless, cross-chain trading protocol. Using it, on-chain traders are able to access deep liquidity across DEXs and CEXs to make spot trades, take out leveraged margin positions, and execute cross-L1 swaps into non-EVM assets like BTC, XMR, and LTC. Unlike traditional DEXs, Tristero ensures that you will get the **best execution price** compared across known CEX and DEX exchanges - all while ensuring full MEV protection.
 
-## Using Tristero
+<Callout title="Non-custodial">
+Tristero never holds assets. All execution is handled by permissionless smart contracts. Your wallet, your keys, your trades.
+</Callout>
 
-### Spot trading
+## Getting started
 
-Using Tristero, you can swap any ERC-20 token across supported EVM chains using Uniswap's Permit2 standard. No token approval transactions needed — sign an EIP-712 message and Tristero handles execution.
+The fastest way to use Tristero programmatically is through the [Python SDK](/docs/tristero/python-sdk):
+
+<Tabs items={['pip', 'poetry', 'uv']}>
+  <Tab>
+  ```sh
+  pip install tristero
+  ```
+  </Tab>
+  <Tab>
+  ```sh
+  poetry add tristero
+  ```
+  </Tab>
+  <Tab>
+  ```sh
+  uv add tristero
+  ```
+  </Tab>
+</Tabs>
+
+```py tab="Spot swap"
+private_key = os.getenv("TEST_ACCOUNT_PRIVKEY")
+w3 = make_async_w3(os.getenv("ARB_RPC_URL"))
+account = Account.from_key(private_key)
+
+result = await execute_permit2_swap(
+    w3=w3,
+    account=account,
+    src_t=TokenSpec(
+      chain_id=ChainID(42161),
+      token_address="0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+    ),  # USDC (Arbitrum)
+    dst_t=TokenSpec(
+      chain_id=ChainID(8453),
+      token_address="0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2"
+    ),  # USDT (Base)
+    raw_amount=1_000_000,  # 1 USDC (6 decimals)
+    timeout=300,
+)
+print(result) # Print the result if the trade succeeded
+```
+```py tab="Open a margin position"
+private_key = os.getenv("TEST_ACCOUNT_PRIVKEY", "")
+wallet = Account.from_key(private_key).address
+
+result = await open_margin_position(
+    private_key=private_key,
+    wallet_address=wallet,
+    chain_id="42161",
+    collateral_token="0xaf88d065e77c8cC2239327C5EDb3A432268e5831",  # USDC
+    base_token="0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",  # WETH
+    leverage_ratio=2,
+    collateral_amount="1000000",  # 1 USDC (6 decimals)
+    wait_for_result=True,
+    timeout=120,
+)
+print(result)
+```
+```py tab="Close a margin position"
+private_key = os.getenv("TEST_ACCOUNT_PRIVKEY", "")
+wallet = Account.from_key(private_key).address
+
+positions = await list_margin_positions(wallet)
+open_pos = next((p for p in positions if p.status == "open"), None)
+if not open_pos:
+    raise RuntimeError("no open positions")
+
+result = await close_margin_position(
+    private_key=private_key,
+    chain_id="42161",
+    position_id=open_pos.taker_token_id,
+    escrow_contract=open_pos.escrow_address,
+    authorized=open_pos.filler_address,
+    cash_settle=False,
+    fraction_bps=10_000,
+    deadline_seconds=3600,
+    wait_for_result=True,
+    timeout=120,
+)
+```
+```py tab="Swap to Bitcoin using Feather"
+src_t = TokenSpec(chain_id=ChainID.ethereum, token_address="native")
+dst_t = TokenSpec(chain_id=ChainID.bitcoin, token_address="native")
+dst_addr = "YOUR_XMR_ADDRESS"
+
+swap = await start_feather_swap(
+    src_t=src_t,
+    dst_t=dst_t,
+    dst_addr=dst_addr,
+    raw_amount=1e17,
+)
+
+order_id = swap.data['id']
+if not order_id:
+    raise RuntimeError(f"Feather swap response missing order id: {swap.data}")
+
+print("deposit_address:", swap.deposit_address)
+print("Waiting for completion...")
+async for update in wait_for_completion(order_id, order_type=OrderType.FEATHER):
+    print(update) # Iterate over order update events
+
+```
+
+## Spot trading
+
+With Tristero, you can swap any ERC-20 token across supported EVM chains using Permit2 signatures. No token approval transactions needed — sign an EIP-712 message and Tristero will handle the rest of the execution.
 
 - Cross-chain: swap USDC on Arbitrum for USDT on Base
 - Same-chain: swap USDC for WETH on Arbitrum
 - Native ETH support
-- Real-time quote streaming via WebSocket (~500ms updates)
+- Real-time quote streaming via WebSocket (~500ms updates) - [[Learn how]](/docs/tristero/python-sdk/websocket-streaming)
 
 Tristero's DeFI swap protocol supports the following EVM chains: **{TristeroChains.map(x => x.name).join(", ")}**
 <TristeroTokenList />
 
 ### Margin trading
 
-Open leveraged positions using any ERC-20 as collateral. Go long on Bitcoin with up to 5x leverage, funded by USDC loans with transparent annual interest rates.
+You can also open leveraged positions using any ERC-20 as collateral. With this, you can take up to 10x leverage on tokenized stocks and real-world assets such as Gold and Oil.
 
 - Any ERC-20 as collateral
 - Configurable leverage ratios
@@ -33,30 +140,11 @@ Open leveraged positions using any ERC-20 as collateral. Go long on Bitcoin with
 
 [Feather](/docs/feather) is a permissionless cross-chain relay for swapping into and out of non-EVM assets. No smart contracts, no LPs, no wallet connections — deposit to an address, receive output from Feather's reserves.
 
-**Supported assets:** BTC, ETH, USDC, SOL, LTC, TRX, USDT (Tron), XMR
+Feather supports the following assets: **{FeatherAssets.map(x => x.name).join(", ")}**
+
+<FeatherTokenList />
 
 Feather uses a balance-sheet market making model: it holds reserves in each currency and adjusts pricing to stay balanced. This means it can support chains that bridges and DEXes typically can't — including UTXO chains and privacy coins.
-
-## Getting started
-
-The fastest way to integrate is through the Python SDK:
-
-```bash
-pip install tristero
-```
-
-The SDK provides high-level functions for each trade type:
-
-| Trade type | SDK function |
-|---|---|
-| Spot swap | `execute_permit2_swap()` |
-| Margin open | `open_margin_position()` |
-| Margin close | `close_margin_position()` |
-| Feather swap | `start_feather_swap()` |
-
-All functions are async and support three environments: production (`api.tristero.com/v2`), staging, and local.
-
-Feather has its own [4-endpoint API](/docs/feather/api) for asset listing, pricing, trade creation, and status polling.
 
 <Cards>
   <Card title="Python SDK" href="/docs/tristero/python-sdk">

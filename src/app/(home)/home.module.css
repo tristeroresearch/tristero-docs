@@ -2,5 +2,14 @@
 .noisegradient {
     @apply w-full h-full absolute top-0 left-0 transition-all duration-150;
     background-image: url("/noisegradient.jpg");
-    mask-image: radial-gradient(circle at 150% -50%, black, transparent 50%);
+    mask-image: radial-gradient(circle at 150% -100%, black, transparent 80%);
+}
+
+.herobackground {
+    @apply w-full h-full mix-blend-luminosity dark:mix-blend-color-burn;
+    background-image: url(/hero-gradient.png);
+    rotate: 180deg;
+    filter: contrast(1);
+    background-position: 0% 50%;
+    mask-image: radial-gradient(circle at 0% -0%, black, transparent 80%);
 }

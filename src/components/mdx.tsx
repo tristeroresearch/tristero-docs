@@ -4,7 +4,8 @@ import { APIPage } from "@/components/api-page";
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
 import { renderMermaidSVG } from "beautiful-mermaid";
 import { TokenList } from "./token-list";
-import { TristeroTokenList } from "@/config/assets-client";
+import { FeatherTokenList, TristeroTokenList } from "@/config/assets-client";
+import * as TabsComponents from "fumadocs-ui/components/tabs";
 
 export async function Mermaid({ chart }: { chart: string }) {
   try {
@@ -30,8 +31,10 @@ export function getMDXComponents(components?: MDXComponents) {
     ...defaultMdxComponents,
     APIPage,
     Mermaid,
+    ...TabsComponents,
     TokenList,
     TristeroTokenList,
+    FeatherTokenList,
     ...components,
   } satisfies MDXComponents;
 }

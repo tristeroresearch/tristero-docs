@@ -1,3 +1,5 @@
+@reference "#app.css";
+
 .docs-layout h1,
 .docs-layout h2,
 .docs-layout h3,
@@ -11,12 +13,16 @@
 
 .docs-layout .prose,
 .docs-layout li {
-    font-family: var(--font-mono), ui-monospace, monospace;
+    font-family: var(--font-inter), ui-monospace, monospace;
 }
 
 .docs-layout .prose {
     font-size: 0.875rem;
     line-height: 1.35rem;
+}
+
+.docs-layout [role="tab"] {
+    @apply text-xs;
 }
 
 .dark .docs-layout {
