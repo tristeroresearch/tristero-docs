@@ -1,5 +1,4 @@
 import { createMDX } from 'fumadocs-mdx/next';
-import inlineCSSModules from 'unplugin-inline-css-modules/next'
 
 const withMDX = createMDX();
 
@@ -10,12 +9,6 @@ const config = {
   images: {
     unoptimized: true,
   },
-  webpack: config => {
-    config.plugins = config.plugins || []
-    config.plugins.push(inlineCSSModules())
-    return config
-  },
-  turbopack: false,
   reactStrictMode: true,
 };
 

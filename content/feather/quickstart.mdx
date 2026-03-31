@@ -13,31 +13,27 @@ The Tristero system does not currently support automatic daisy-chaining from Tri
 
 Feather is designed to be easy to integrate. Anything that can make HTTP requests and initiate funds transfer can trade via Feather. There are only four API calls you may need to make when setting up and executing a trade. API calls should be made to `https://feather-prod.tristero.com`:
 
-**1. Get a list of supported assets**
-```http
-GET /assets
+<div style={{maxWidth: '400px', }}>
+```mermaid
+sequenceDiagram
+    Client->>Feather: GET /assets
+    Feather-->>Client: supported assets
+    Client->>Feather: GET /price?input=BTC&output=ETH
+    Feather-->>Client: price quote
+    Client->>Feather: POST /trade
+    Feather-->>Client: deposit address + trade_id
+    loop polling
+        Client->>Feather: GET /status?id=trade_id
+        Feather-->>Client: status update
+    end
 ```
+</div>
 
-**2. Get a price quote**
-```http
-GET /price?input_asset=BTC&output_asset=ETH
-```
-
-**3. Create the trade — get a deposit address**
-```http
-POST /trade { "InputAsset": "BTC", "OutputAsset": "ETH", "OutputAddress": "0x..." }
-```
-
-**4. Poll for status**
-```http
-GET /status?id=<trade_id>
-```
-
-Send funds to the `InputAddress` returned by `/trade` and Feather does the rest.
+You can read about integration in more detail in our [API Reference](/docs/feather/getAssets).
 
 ### Python SDK
 
-The Tristero Python SDK has support for placing Feather trades.
+The Tristero Python SDK also has support for placing Feather trades.
 ```sh tab="pip"
 pip install tristero
 ```
@@ -72,3 +68,4 @@ async for update in wait_for_completion(order_id, order_type=OrderType.FEATHER):
     print(update) # Iterate over order update events
 ```
 
+For more information, you can refer to the [Python SDK](/docs/tristero/python-sdk) docs.
