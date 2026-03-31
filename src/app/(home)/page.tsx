@@ -61,11 +61,11 @@ export default function HomePage() {
 
           <div className="inline-block">
             <Link
-              className="px-2 mt-6 py-1.5 bg-[#E07830] hover:bg-[#e15c1b] rounded-lg text-sm flex gap-2 items-center text-white font-semibold group"
+              className="px-2 mt-6 py-1 bg-[#E07830] hover:bg-[#e15c1b] rounded-md text-sm font-syne flex gap-2 flex items-center text-white font-medium group"
               role="button"
               href="/docs/tristero"
             >
-              Get Started
+              <span>Get Started</span>
               <span className="overflow-hidden relative w-[1em] h-[1em] flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -104,11 +104,11 @@ export default function HomePage() {
     .chevron-primary { transform: translateX(0); }
     .chevron-ghost   { transform: translateX(-150%); }
 
-    .group:hover .chevron-primary { animation: slideOut 0.35s ease-in-out forwards; }
-    .group:hover .chevron-ghost   { animation: slideIn  0.35s ease-in-out forwards; }
+    .group:hover .chevron-primary { animation: slideOut 0.2s ease-in-out forwards; }
+    .group:hover .chevron-ghost   { animation: slideIn  0.2s ease-in-out forwards; }
 
-    .group:not(:hover) .chevron-primary { animation: slideBack      0.35s ease-in-out forwards; }
-    .group:not(:hover) .chevron-ghost   { animation: slideGhostBack 0.35s ease-in-out forwards; }
+    .group:not(:hover) .chevron-primary { animation: slideBack      0.2s ease-in-out forwards; }
+    .group:not(:hover) .chevron-ghost   { animation: slideGhostBack 0.2s ease-in-out forwards; }
   `}</style>
             </Link>
           </div>
