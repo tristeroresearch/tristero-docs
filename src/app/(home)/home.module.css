@@ -27,44 +27,18 @@
 
 @keyframes rendergrain {
     0%,
-    15% {
+    33% {
         background-position: 15% 15%;
     }
-    15.1%,
-    20% {
+    33.1%,
+    65.9% {
+        background-position: 50% 85%;
+    }
+    66% {
+        background-position: 27% 50%;
+    }
+    66.1%,
+    100% {
         background-position: 27% 105%;
-    }
-    20%,
-    30% {
-        background-position: 31% 50%;
-    }
-    30% 45% {
-        background-position: 31% 90%;
-    }
-    45%,
-    40% {
-        background-position: 23% 67%;
-    }
-
-    50% {
-        background-position: 23% 67%;
-    }
-    51% {
-        background-position: 88% 45%;
-    }
-    55.1%,
-    65% {
-        background-position: 88% 45%;
-    }
-    65.1%,
-    75% {
-        background-position: 15% 93%;
-    }
-    75.1%,
-    85% {
-        background-position: 62% 31%;
-    }
-    85.1% {
-        background-position: 0% 0%;
     }
 }
