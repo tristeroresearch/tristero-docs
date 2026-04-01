@@ -55,8 +55,8 @@ export default function HomePage() {
             Build on Tristero
           </h1>
           <p className="font-mono text-sm text-black/40 dark:text-white/40 leading-relaxed max-w-[480px]">
-            Integration references, API specifications, and SDK documentation
-            for the Tristero trading platform.
+            Integration references, API specifications, and SDK documentation for the Tristero
+            trading platform.
           </p>
 
           <div className="inline-block">
@@ -132,7 +132,7 @@ export default function HomePage() {
           <Card
             href="/docs/feather"
             number="03"
-            title="Cross-VM API"
+            title="Feather Cross-VM API"
             description="Permissionless market maker for swaps to non-EVM chains"
             shift={300}
           />
