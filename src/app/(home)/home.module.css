@@ -6,10 +6,9 @@
 }
 
 .herobackground {
-    @apply w-full h-full mix-blend-luminosity dark:mix-blend-color-burn;
+    @apply w-full h-full mix-blend-luminosity dark:mix-blend-color-burn bg-black contrast-100;
     background-image: url(/hero-gradient.png);
     rotate: 180deg;
-    filter: contrast(1);
     background-position: 1% 40%;
     mask-image: radial-gradient(circle at 0% -0%, black, transparent 80%);
 }
@@ -20,8 +19,48 @@
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='89' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     background-size: 200px 180px;
-    mix-blend-mode: soft-light; /* or soft-light for subtle effect */
+    mix-blend-mode: color-burn;
     pointer-events: none;
-    /* Inherit mask so noise fades with the gradient */
     mask-image: inherit;
+    animation: rendergrain 1s linear infinite;
+}
+
+@keyframes rendergrain {
+    0%,
+    15% {
+        background-position: 15% 15%;
+    }
+    15.1%,
+    30% {
+        background-position: 47% 52%;
+    }
+    30% 45% {
+        background-position: 31% 90%;
+    }
+    45%,
+    40% {
+        background-position: 23% 67%;
+    }
+
+    50% {
+        background-position: 23% 67%;
+    }
+    51% {
+        background-position: 88% 45%;
+    }
+    55.1%,
+    65% {
+        background-position: 88% 45%;
+    }
+    65.1%,
+    75% {
+        background-position: 15% 93%;
+    }
+    75.1%,
+    85% {
+        background-position: 62% 31%;
+    }
+    85.1% {
+        background-position: 0% 0%;
+    }
 }
