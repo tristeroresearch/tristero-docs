@@ -10,6 +10,12 @@ description: Tristero Python SDK overview and installation
 
 This library provides both high-level convenience functions and lower-level components for Tristero's trading platform. You can make spot trades, take leveraged margin positions, and swap assets cross-VM via [Feather](/docs/feather).
 
+## Installation
+
+```bash
+pip install tristero
+```
+
 ## How it works
 
 Tristero supports two primary swap mechanisms:
@@ -68,12 +74,6 @@ print("deposit_address:", swap.deposit_address)
 print("Waiting for completion...")
 async for update in wait_for_completion(order_id, order_type=OrderType.FEATHER):
     print(update) # Iterate over order update events
-```
-
-## Installation
-
-```bash
-pip install tristero
 ```
 
 ## Examples
