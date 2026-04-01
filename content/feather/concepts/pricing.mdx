@@ -3,31 +3,30 @@ title: Pricing Model
 description: Feather's pricing model
 ---
 
-### Trade Equilibrium Condition
+### Trade Equation
 
 Feather's balance sheet market making model means we can offer a very simple, predictable, and favorable pricing model for users.
 
-Conceptually, your trade seamlessly sells your input asset and then buys your output asset. Fees are deducted from your input amount before exchanging to pay for the transactions involved. The system solves this equilibrium condition to calculate payments:
+Conceptually, your trade seamlessly sells your input asset and then buys your output asset. Fees are deducted from your input amount before exchanging to pay for the transactions involved. The system solves this equation (representing the buy equalling the sell) to calculate payments:
 
 $$
 a_{in}B_{in} - \frac{\lambda_{in} a_{in}^2}{2} =
 a_{out} S_{out} + \frac{\lambda_{out}a_{out}^2}{2}
 $$
 
-Where $a_{side}$ is the token amount, $B_{side},S_{side}$ corresponds to the bid and ask that Feather is willing to give for a particular asset, and $in,out$ are the respective input and output assets requested for a particular trade. $\lambda_{side}$, known as the *impact rate*, describes the rate at which a change in balance will affect the price of an asset.
-
+Where $a_{side}$ is the token amount, $B_{side},S_{side}$ corresponds to the buy and sell that Feather is willing to give for a particular asset, and $in,out$ are the respective input and output assets requested for a particular trade. $\lambda_{side}$, known as the *impact rate*, describes the rate at which a change in balance will affect the price of an asset.
 
 No opaque orderbook spreads, MEV, or unpredictable orderbook liquidity are involved, only one simple equation. The main complexity is the price impact, which also affects the bid and ask prices for future trades. Both come from our balance price adjustment.
 
 ### Price Adjustment
 
-We adjust our prices as a linear function of our current balance so that so that when we are fully out of some asset or fully overfilled, arbitrageurs and price-sensitive users will be incentivised to rebalance us (users who push us further out of balance pay for that subsidy). For an asset $a$, let $M_a$ be the mid-price of the asset, and $B_a$ and $T_a$ be the respective *current balance* and *target balance* for the market-maker. For that asset, the price can be calculated as:
+We adjust our prices as a linear function of our current balance so that so that when we are out of some asset or overfilled, arbitrageurs and price-sensitive users will be incentivised to rebalance us (users who push us further out of balance pay for that subsidy). For an asset $a$, let $M_a$ be the mid-price of the asset, and $B_a$ and $T_a$ be the respective *current balance* and *target balance* for the market-maker. For that asset, the price can be calculated as:
 
 $$
 P_{a} = M_{a} + \frac{R_a*(B_a)}{T_a} 
 $$
 
-$R_a$ represents the *rebalance halfspread*: it is related to the spread that is typically and easily on offer elsewhere. Integrating this over the whole size of the trade gives us the above exchange half-equations, with a simple and intuitive result: you pay the average price that the assets had through your trade. 
+$R_a$ represents the *rebalance halfspread*: it is related to the spread that is typically and easily on offer elsewhere to arbitrage against. Defining $\lambda$ as the constant factors and integrating this price over the whole size of the trade gives us the above exchange half-equations, with a simple and intuitive result: you pay the average price that the assets had through your trade. 
 
 Market prices and our balance sheet adjustments may fluctuate as market activity elsewhere and other trades on Feather both affect price. As such, the quotes you get from the [/price](/feather/api/getPrice) endpoint or on [trade creation](/feather/api/createTrade) are only an estimate. The final price parameters for your trade are only **fixed at the time your trade is executed**. The current prices, fees, and impact rates for each asset that go into the prices can be seen by grabbing the [/assets](/feather/api/getAssets) endpoint, resulting in a report something like this for each asset:
 
