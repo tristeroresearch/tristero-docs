@@ -37,9 +37,13 @@
     color: #e07830;
 }
 
-.dark .docs-layout [data-active="true"],
+.docs-layout [data-active="true"],
 [data-toc-popover] {
-    z-index: 150 !important;
+    z-index: 30 !important;
+}
+
+#nd-sidebar-mobile {
+    z-index: 40;
 }
 
 .dark .docs-layout [data-active="true"] a,

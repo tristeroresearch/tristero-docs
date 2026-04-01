@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 Feather was designed with robustness in mind. When you create a trade, it goes through a series of execution states that ensure that your trade will succeed even in the case of anomalies:
 
-<Image priority src={stateMachine} alt="Feather State Machine" />
+<Image priority src={stateMachine} className="w-100" alt="Feather State Machine" />
 
 We guarantee that once your input deposit is accepted, you will definitely receive your output funds. It's possible for transactions to fail or get stuck for a variety of reasons. If this happens, Feather ensures that the transaction is safely cancelled and then persistently retried until it succeeds. 
 

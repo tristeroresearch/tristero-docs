@@ -31,8 +31,12 @@
         background-position: 15% 15%;
     }
     15.1%,
+    20% {
+        background-position: 27% 105%;
+    }
+    20%,
     30% {
-        background-position: 47% 52%;
+        background-position: 31% 50%;
     }
     30% 45% {
         background-position: 31% 90%;
