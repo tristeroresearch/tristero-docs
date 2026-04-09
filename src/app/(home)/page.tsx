@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import classes from "./home.module.css";
 
 function Card(props: {
@@ -61,7 +64,7 @@ export default function HomePage() {
 
           <div className="inline-block">
             <Link
-              className="px-2 mt-6 py-1 bg-[#E07830] hover:bg-[#e15c1b] rounded-md text-sm font-syne flex gap-2 flex items-center text-white font-medium group"
+              className="px-2 mt-6 py-1 bg-[#E07830] hover:bg-[#e15c1b] rounded-md text-sm font-syne flex gap-2 flex items-center text-white font-medium group cursor-pointer"
               role="button"
               href="/docs/tristero"
             >

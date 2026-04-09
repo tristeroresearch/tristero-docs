@@ -32,7 +32,6 @@ export const featherTokens = [
   "solana",
 ];
 
-// Export as a plain array - no React, no "use client"
 export const TristeroChains = tristeroProdChains.map((k) => ({
   src: `/network/${k}.png`,
   name: chains[k as keyof typeof chains]?.display || k,

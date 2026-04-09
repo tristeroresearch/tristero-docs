@@ -49,7 +49,7 @@ A simple ETH->BTC swap can be initiate with the code below:
 ```py
 src_t = TokenSpec(chain_id=ChainID.ethereum, token_address="native")
 dst_t = TokenSpec(chain_id=ChainID.bitcoin, token_address="native")
-dst_addr = "YOUR_XMR_ADDRESS"
+dst_addr = "YOUR_BTC_ADDRESS"
 
 swap = await start_feather_swap(
     src_t=src_t,

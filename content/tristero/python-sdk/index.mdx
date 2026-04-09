@@ -8,7 +8,13 @@ description: Tristero Python SDK overview and installation
 [![PyPI version](https://badge.fury.io/py/tristero.svg)](https://badge.fury.io/py/tristero)
 [![Python Support](https://img.shields.io/pypi/pyversions/tristero.svg)](https://pypi.org/project/tristero/)
 
-This library provides both high-level convenience functions and lower-level components for Tristero's trading platform.
+This library provides both high-level convenience functions and lower-level components for Tristero's trading platform. You can make spot trades, take leveraged margin positions, and swap assets cross-VM via [Feather](/docs/feather).
+
+## Installation
+
+```bash
+pip install tristero
+```
 
 ## How it works
 
@@ -19,15 +25,55 @@ Tristero supports two primary swap mechanisms:
 - **Sign & Submit** - Sign an EIP-712 order and submit for execution
 - **Monitor** - Track swap progress via WebSocket updates
 
+```py
+private_key = os.getenv("TEST_ACCOUNT_PRIVKEY")
+w3 = make_async_w3(os.getenv("ARB_RPC_URL"))
+account = Account.from_key(private_key)
+
+result = await execute_permit2_swap(
+    w3=w3,
+    account=account,
+    src_t=TokenSpec(
+      chain_id=ChainID(42161),
+      token_address="0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+    ),  # USDC (Arbitrum)
+    dst_t=TokenSpec(
+      chain_id=ChainID(8453),
+      token_address="0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2"
+    ),  # USDT (Base)
+    raw_amount=1_000_000,  # 1 USDC (6 decimals)
+    timeout=300,
+)
+print(result) # Print the result if the trade succeeded
+```
+
 ### Feather Swaps (Cross-VM)
 - **Quote & Deposit** - Request a quote to receive a deposit address
 - **Manual Transfer** - Send funds to the provided deposit address
 - **Monitor** - Track swap completion via WebSocket updates
 
-## Installation
+This example makes a swap from Ethereum to Bitcoin:
 
-```bash
-pip install tristero
+```py
+src_t = TokenSpec(chain_id=ChainID.ethereum, token_address="native")
+dst_t = TokenSpec(chain_id=ChainID.bitcoin, token_address="native")
+dst_addr = "YOUR_BTC_ADDRESS"
+
+swap = await start_feather_swap(
+    src_t=src_t,
+    dst_t=dst_t,
+    dst_addr=dst_addr,
+    raw_amount=1e17,
+)
+
+order_id = swap.data['id']
+if not order_id:
+    raise RuntimeError(f"Feather swap response missing order id: {swap.data}")
+
+print("deposit_address:", swap.deposit_address)
+print("Waiting for completion...")
+async for update in wait_for_completion(order_id, order_type=OrderType.FEATHER):
+    print(update) # Iterate over order update events
 ```
 
 ## Examples

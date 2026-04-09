@@ -1,5 +1,6 @@
 {
   "title": "Tristero",
   "description": "Tristero trading library documentation",
-  "root": true
+  "root": true,
+  "pages": ["index", "python-sdk", "api", "..."]
 }

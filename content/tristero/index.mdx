@@ -95,7 +95,7 @@ result = await close_margin_position(
 ```py tab="Swap to Bitcoin using Feather"
 src_t = TokenSpec(chain_id=ChainID.ethereum, token_address="native")
 dst_t = TokenSpec(chain_id=ChainID.bitcoin, token_address="native")
-dst_addr = "YOUR_XMR_ADDRESS"
+dst_addr = "YOUR_BTC_ADDRESS"
 
 swap = await start_feather_swap(
     src_t=src_t,
@@ -127,14 +127,20 @@ With Tristero, you can swap any ERC-20 token across supported EVM chains using P
 Tristero's DeFI swap protocol supports the following EVM chains: **{TristeroChains.map(x => x.name).join(", ")}**
 <TristeroTokenList />
 
+For more information on placing spot trades, reference the [Python SDK documentation](/docs/tristero/python-sdk/spot-swaps) or the [API](/docs/tristero/api/getQuote).
+
 ### Margin trading
 
-You can also open leveraged positions using any ERC-20 as collateral. With this, you can take up to 10x leverage on tokenized stocks and real-world assets such as Gold and Oil.
+You can also open leveraged positions (up to 10x) on numerous ERC-20s and tokenized assets as collateral.
 
-- Any ERC-20 as collateral
+- ERC-20s and tokenized assets as collateral: PAXG, TSLA, WBTC and more are all tradeable in the app now.
 - Configurable leverage ratios
 - Partial or full position closes
-- Cash settlement or swap settlement
+- Automatic liquidations and payments
+
+Tristero's margin feature was built to avoid [ADL](https://thogiti.github.io/2025/12/11/Autodeleveraging-Hyperliquid-653M-debate.html) - an unhealthy market condition in which the positions on one side of a market are forcibly closed on one side of a market in order to maintain solvency, without any gains on the other side. Tristero instead takes a lending based approach - any position onto which a counterparty agrees to allow leverage on will be allowed, avoiding the liquidation risks that are introduced by creating a global orderbook for the asset.
+
+For more information on placing margin trades, reference the [Python SDK documentation](/docs/tristero/python-sdk/margin-trading) or the [API](/docs/tristero/api/getQuote).
 
 ### Cross-VM
 
@@ -146,14 +152,5 @@ Feather supports the following assets: **{FeatherAssets.map(x => x.name).join(",
 
 Feather uses a balance-sheet market making model: it holds reserves in each currency and adjusts pricing to stay balanced. This means it can support chains that bridges and DEXes typically can't — including UTXO chains and privacy coins.
 
-<Cards>
-  <Card title="Python SDK" href="/docs/tristero/python-sdk">
-    Installation, configuration, and usage guides for the Python SDK
-  </Card>
-  <Card title="Feather" href="/docs/feather">
-    Cross-VM swap relay for non-EVM assets
-  </Card>
-  <Card title="API Reference" href="/docs/tristero/api">
-    Full Tristero REST API reference
-  </Card>
-</Cards>
+You can get started with making cross-VM trades by referencing the [Feather Quickstart](/docs/feather/quickstart).
+
