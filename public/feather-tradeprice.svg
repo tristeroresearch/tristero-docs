@@ -1,0 +1,91 @@
+<svg width="100%" viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="arrow-blue" viewBox="0 0 12 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+    <path d="M1 1L10 5L1 9Z" fill="#3B8BD4" stroke="none"/>
+  </marker>
+  <marker id="arrow-orange" viewBox="0 0 12 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+    <path d="M1 1L10 5L1 9Z" fill="#D85A30" stroke="none"/>
+  </marker>
+  <marker id="arrow-mid" viewBox="0 0 12 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+    <path d="M1 1L10 5L1 9Z" fill="#666" stroke="none"/>
+  </marker>
+</defs>
+
+<!-- ===== LEFT PANEL ===== -->
+<line x1="60" y1="25" x2="60" y2="345" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="45" y1="340" x2="315" y2="340" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+<text font-family="sans-serif" font-size="12" x="58" y="18" text-anchor="end" fill="#666">USD value</text>
+<text font-family="sans-serif" font-size="12" x="318" y="344" text-anchor="start" fill="#666">a_in</text>
+
+<!-- V* dotted line to left y-axis, tick only -->
+<line x1="60" y1="100" x2="243.3" y2="100" stroke="#666" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+<line x1="56" y1="100" x2="64" y2="100" stroke="#666" stroke-width="1"/>
+
+<!-- Blue solid up to V* -->
+<polyline
+  points="60,340 73.8,316.4 87.5,293.8 101.3,272.1 115,251.2 128.8,231.2 142.5,212.2 156.3,194.0 170,176.8 183.8,160.4 197.5,145.0 211.3,130.4 225,116.8 238.8,104.0 243.3,100"
+  fill="none" stroke="#3B8BD4" stroke-width="2"
+  stroke-linejoin="round" stroke-linecap="round"
+  marker-end="url(#arrow-blue)"/>
+
+<!-- Blue dashed continuation -->
+<polyline
+  points="243.3,100 252.5,92.2 266.3,81.2 280,71.2 293.8,62.0 307.5,53.8"
+  fill="none" stroke="#3B8BD4" stroke-width="2" stroke-dasharray="4 3" opacity="0.35"
+  stroke-linejoin="round" stroke-linecap="round"/>
+
+<text font-family="sans-serif" font-size="12" x="100" y="72" text-anchor="start" fill="#3B8BD4">B_in·a_in − (λ_in/2)·a_in²</text>
+<text font-family="sans-serif" font-size="12" x="104" y="235" text-anchor="start" fill="#3B8BD4">Input sell</text>
+
+<circle cx="243.3" cy="100" r="4.5" fill="#3B8BD4"/>
+<line x1="243.3" y1="104.5" x2="243.3" y2="340" stroke="#3B8BD4" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+<line x1="243.3" y1="336" x2="243.3" y2="344" stroke="#666" stroke-width="1"/>
+<text font-family="sans-serif" font-size="12" x="243.3" y="358" text-anchor="middle" fill="#666">a_in*</text>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="175" y="400" text-anchor="middle" fill="#111">Input asset amount</text>
+
+
+<!-- ===== RIGHT PANEL ===== -->
+<line x1="370" y1="25" x2="370" y2="345" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="355" y1="340" x2="630" y2="340" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+<text font-family="sans-serif" font-size="12" x="368" y="18" text-anchor="end" fill="#666">USD value</text>
+<text font-family="sans-serif" font-size="12" x="633" y="344" text-anchor="start" fill="#666">a_out</text>
+
+<!-- V* dotted line to right y-axis, tick only -->
+<line x1="370" y1="100" x2="476.5" y2="100" stroke="#666" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+<line x1="366" y1="100" x2="374" y2="100" stroke="#666" stroke-width="1"/>
+
+<!-- Orange solid up to V* -->
+<polyline
+  points="370,340 383.8,315.1 397.5,288.4 411.3,259.9 425,229.6 438.8,197.5 452.5,163.6 466.3,127.9 476.5,100"
+  fill="none" stroke="#D85A30" stroke-width="2"
+  stroke-linejoin="round" stroke-linecap="round"
+  marker-end="url(#arrow-orange)"/>
+
+<!-- Orange dashed continuation -->
+<polyline
+  points="476.5,100 480,90.4 485.5,75.1 493.8,51.1"
+  fill="none" stroke="#D85A30" stroke-width="2" stroke-dasharray="4 3" opacity="0.35"
+  stroke-linejoin="round" stroke-linecap="round"/>
+
+<text font-family="sans-serif" font-size="12" x="418" y="72" text-anchor="start" fill="#D85A30">S_out·a_out + (λ_out/2)·a_out²</text>
+<text font-family="sans-serif" font-size="12" x="430" y="195" text-anchor="start" fill="#D85A30">Output buy</text>
+
+<circle cx="476.5" cy="100" r="4.5" fill="#D85A30"/>
+<line x1="476.5" y1="104.5" x2="476.5" y2="340" stroke="#D85A30" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+<line x1="476.5" y1="336" x2="476.5" y2="344" stroke="#666" stroke-width="1"/>
+<text font-family="sans-serif" font-size="12" x="476.5" y="358" text-anchor="middle" fill="#666">a_out*</text>
+<text font-family="sans-serif" font-size="14" font-weight="500" x="495" y="400" text-anchor="middle" fill="#111">Output asset amount</text>
+
+
+<!-- ===== EQUALITY BRIDGE ===== -->
+<line x1="248" y1="100" x2="470" y2="100"
+  stroke="#666" stroke-width="1.5" stroke-dasharray="6 4"
+  marker-end="url(#arrow-mid)"/>
+<rect x="291" y="82" width="138" height="18" rx="3"
+  fill="white" opacity="0.9"/>
+<text font-family="sans-serif" font-size="12" x="360" y="95" text-anchor="middle" fill="#666">exchangeable value</text>
+
+</svg>

@@ -3,6 +3,9 @@ title: Pricing Model
 description: Feather's pricing model
 ---
 
+import tradePrice from '../../../public/feather-tradeprice.svg'
+import Image from 'next/image';
+
 ### Trade Equation
 
 Feather's balance sheet market making model means we can offer a very simple, predictable, and favorable pricing model for users.
@@ -17,6 +20,8 @@ $$
 Where $a_{side}$ is the token amount, $B_{side},S_{side}$ corresponds to the buy and sell that Feather is willing to give for a particular asset, and $in,out$ are the respective input and output assets requested for a particular trade. $\lambda_{side}$, known as the *impact rate*, describes the rate at which a change in balance will affect the price of an asset.
 
 No opaque orderbook spreads, MEV, or unpredictable orderbook liquidity are involved, only one simple equation. The main complexity is the price impact, which also affects the bid and ask prices for future trades. Both come from our balance price adjustment.
+
+<Image src={tradePrice} alt="Feather's Trade Pricing Model" />
 
 ### Price Adjustment
 
