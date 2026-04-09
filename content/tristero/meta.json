@@ -2,5 +2,5 @@
   "title": "Tristero",
   "description": "Tristero trading library documentation",
   "root": true,
-  "pages": ["index", "python-sdk", "api", "..."]
+  "pages": ["index", "execution", "python-sdk", "api", "..."]
 }
