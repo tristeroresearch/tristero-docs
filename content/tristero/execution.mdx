@@ -3,24 +3,55 @@ title: How We Get the Best Price
 description: Tristero's trade simulations enable world class trade execution
 ---
 
-The best trade execution prices on the market are in on-chain Defi where fee competition is very robust. If you could easily access it, you could lever up and take advantage of many trading opportunities. However, to actually take advantage of those prices as a regular user is very difficult. There are many ways to get picked off or otherwise get bad execution, some very subtle.
+The best crypto trading prices on the market are on defi venues where fee competition is very robust, but it's not easy to find them and a lot can go wrong. Tristero has built a world class execution engine to make sure you actually get the best price. But its easy to say "we have the best prices", and harder to actually deliver:
 
-In response, we built Tristero's world-class trade execution engine to always get you the best possible price. Great spot trade execution is nice, but it really shines in the things that become possible on top of great spot execution. For example, viable leverage ratios for margin trading are directly correlated to how tight we can get spot spreads. The better spot execution we can get, the more powerful tools we can offer you and the more profitable trades you can get access to.
 
-It's easy to say "we have the best prices", but much harder to actually deliver. Here's how we do it:
+## How You Get Wrecked On Price
 
-The best prices at any given time are not always at any single defi venue. You have to hunt around for them or use a quote aggregator. But the quotes are often just lies. Since the best quote typically gets the trade, venues overstate the quotes and then underdeliver and call it "slippage", or don't give you the upside when the price moves in your favor.
+Suppose you go to make a trade on defi. Naively, you would probably start by going around to various defi venues to find one that supports your desired trade, get quotes, pick one with a good price, and try to execute it. Here's what would go wrong for you:
 
-In response, Tristero runs trade simulations on your behalf: we take the transaction calldata provided by the quote, and then virtually run it on our node as if it had gone through at the end of the last block, to see what result you would have actually got. This way we correct for quote distortions and get a much more accurate estimate of what price they are really offering. Then we pick the best one and quickly submit the trade with very tight slippage tolerance of 10 bps so that there's no space to get picked off by front-runners. We can get away with much tighter slippage tolerance without getting trade failures because the simulation gives us good information on what the real execution price is going to be.
+*   The actual best price at any moment may be in unintuitive routes or even private market makers with sub-second time limits that can only be accessed programmatically.
 
-On chains where there are flash blocks and other mechanisms to get the trades to run close in time to the simulation, we use them to increase execution certainty and protect you against bots and market fluctuations. Getting rapid execution guarantees meant also building great code for high performance transaction construction, nonce-handling, latest block awareness, and all that. Effectively, we built the machinery of a Maximum Extractable Value (MEV) bot, but for your benefit.
+*   The quotes are probably "optimistic" overestimates; since the best quote typically gets the trade, venues overstate the quotes and then underdeliver.
 
-Because our execution engine is able to act quickly, it is also able to give you access to high frequency automatic market maker quotes with tight deadlines and better prices. This speed premium is why we unfortunately can't give you the exact transaction calldata we will use for your trade, as we need to execute faster than humanly possible to get the best result on your behalf.
+*   MEV bots will frontrun your trade forcing you down to the lower end of your slippage tolerance. Your trade is vulnerable and sitting in the mempool for anyone with the right machinery to see and preempt.
 
-But this speed and automatic nature of the trade means we need a second layer of protection from price movement: between the time when you see the price and sign the permit2 swap, and when we do our high speed simulation-protected trade for you, the price you saw may have moved out from under you. So we also run a traditional slippage limit of 50 bps on the quoted price as well. We're going to get you great execution at the time of the trade, but if the market is moving against you, we also make sure the price is what you thought it was.
+We have engineered solutions to all of these problems, building a sophisticated system to execute your trades at the highest possible quality.
 
-These mechanisms and more are the basis for Tristero giving you access to the best spot execution on the market. They were not easy to build. But now that they exist, great execution translates directly into great additional capabilities:
 
-Margin trading is limited by spot execution quality, which becomes the dominant cost. If you have 100 bps of slip on spot, but you want to trade with 10x leverage, you are instantly down 10% on initiating the trade before the price even moves, and then another 10% on getting out. Slippage is multiplied by the leverage ratio and comes directly out of your margin. At 50x leverage, you lose your entire position before the price even moves. So cutting spot slippage in half means doubling the available leverage ratios, which means getting access to more upside.
+## Our Liquidity Sources
 
-For example, perpetual futures DEXs are often trading asymmetrically, like a negative funding rate for shorts to balance an increased demand for longs. Maybe the perps DEX offers 14% for shorts, while the interest rate for margin trading is more like 4%. If you can lever up a 10 bps spot execution by 20x, you can collect 200% risk-free interest at the cost of only 2% slippage. Great execution means higher leverage means more arbitrage profit for you.
+When your trade comes in to Tristero, we can source liquidity from any of three possible sources:
+
+*   **Our own darkpool orderbook**. As users place trades with us, we can match them up or string them together (including with our own automatic market making) to fill your trade with no middlemen and no possibility of frontrunning to extract MEV, meaning the best possible prices.
+
+*   **Centralized exchanges**. We might rapidly fill your trade by a variety of means backed by centralized exchange venues like binance, hyperliquid, lighter, etc.
+
+*   **Off-the-shelf defi venues**. We go find the best route through existing defi liquidity sources for your particular trade at any given moment. This is our main source of liquidity.
+
+None of these will always be the best option. The last one has been our primary focus so far as the easiest source of great prices. But it's not trivial. As detailed above, there are many ways to lose money, and many systems we have had to design to ensure best results:
+
+
+## Our Execution Pipeline
+
+We attack the problem of optimal defi trade execution with a number of innovations we apply as a trade moves through the phases of the execution process:
+
+### Phase 1: Candidate Route Finding
+Our first step is to construct a list of candidate trade routes from the known supported routes of each venue. Candidate routes are usually just single-venue swaps, but could also involve chaining through multiple venues if the prices are advantageous or if the direct trade isn't available. We then narrow this down by various heuristics to a final candidate set.
+
+Because our whole pipline moves quickly, we are also able to give you access to private market makers and other liquidity sources with very tight time limits in this search for candidates that would be otherwise inaccessible to human traders.
+
+### Phase 2: Trade Simulation
+Instead of trusting the provided quotes for each candidate, we directly simulate the trade outcome on our nodes as if the trade had gone through at the end of the last block. The simulation uses the known calldata and known blockchain state, taking advatage of referential transparency. This gives us a very accurate and unbiased picture of what the trade will actually do, without quote distortions or MEV bot attacks. Using these accurate estimates, we select the best route for your trade.
+
+### Phase 3: Permit2 Quote Signing
+We continuously re-run the simulation and selection to keep the prices updated until you act to authorize the swap. At that point we fix the quote with an authorized slippage tolerance of 50 bps. This authorization is signed privately off-chain, so it cannot be frontrun by adversaries. The slippage tolerance here is primarily protection from unexpected price movement, not adversarial front-running.
+
+### Phase 4: Wrapping In a Guard Transaction
+Once the trade is authorized, we run the simulation one final time to get the most accurate possible estimate of what we expect the trade to output. Then we wrap the trade transaction(s) in a guard transaction that enforces very tight slippage tolerance, for example 10 bps. This makes it dangerous and unprofitable to attempt MEV attacks against your trade; if someone moves the price against you, your transaction just gets rolled back and they eat the fees. Extremely tight tolerances are possible because the simulation gives us a very accurate estimate of what the trade will actually do.
+
+We also enforce the 50bps quote slippage tolerance here. Since the simulation and trade execution are so close in time, the tight slippage limit there only protects against MEV attacks and other execution anomalies, not price movement since you signed off on the quote.
+
+### Phase 5: Rapid Execution
+
+On chains where there are flash blocks and other mechanisms to get the trades to run close in time to the previous block and thus to the simulation, we use them to increase execution certainty and protect you against bots and market fluctuations. Rapid execution meant also building great systems for high performance transaction construction, nonce-handling, latest block awareness, etc. Effectively, we built the machinery of a Maximum Extractable Value (MEV) bot, but for your benefit.
